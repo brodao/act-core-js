@@ -1,3 +1,5 @@
+// @flow
+
 const chalk = require("chalk");
 const program = require("commander");
 
