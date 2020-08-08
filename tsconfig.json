@@ -3,7 +3,7 @@
 		"declaration": true,
 		"module": "ES6",
 		"moduleResolution": "node",
-		"lib": ["esnext"],
+		"lib": ["ES6", "DOM"],
 		"target": "ES6",
 		"outDir": "./lib",
 		"removeComments": true,
