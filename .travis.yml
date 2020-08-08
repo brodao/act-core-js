@@ -1,10 +1,9 @@
 language: node_js
 node_js:
     - "node" # use latest stable nodejs version
-before_script:
-    - echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
 script:
+    - echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
     - npm run coverage # jest test with coverage flag does coverage too
 
 after_script:
