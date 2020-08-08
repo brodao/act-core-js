@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aviso com vários agumentos 1`] = `undefined`;
+
+exports[`Aviso simples 1`] = `undefined`;
+
+exports[`Erro com vários agumentos 1`] = `undefined`;
+
+exports[`Erro simples 1`] = `undefined`;
+
+exports[`Informação com vários agumentos 1`] = `undefined`;
+
+exports[`Informação simples 1`] = `undefined`;
+
+exports[`Log com argumentos {} 1`] = `undefined`;
+
+exports[`Verbose com vários agumentos 1`] = `undefined`;
+
+exports[`Verbose desligado 1`] = `undefined`;
+
+exports[`Verbose simples 1`] = `undefined`;

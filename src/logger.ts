@@ -1,5 +1,5 @@
-import chalk from "chalk";
-import program from "commander";
+const chalk = require("chalk");
+const program = require("commander");
 
 type Color = (...text: string[]) => string;
 
@@ -134,7 +134,19 @@ log.raw = (...args: any[]) => {
 	});
 };
 
+log.verboseOn = () => {
+	log.config.verboseEnable = true;
+};
+
+log.verboseOff = () => {
+	log.config.verboseEnable = false;
+};
+
 log.verbose = (text: string | string[], args?: any) => {
+	if (!log.config.verboseEnable) {
+		return;
+	}
+
 	if (args) {
 		log.warn(text);
 		Object.keys(args).forEach((key) => {
@@ -149,6 +161,7 @@ log.chalk = chalk;
 
 log.config = {
 	raw: false,
+	verboseEnable: false,
 };
 
 export interface IAppInfo {
