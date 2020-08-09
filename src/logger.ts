@@ -1,7 +1,7 @@
 // @flow
 
-const chalk = require("chalk");
-const program = require("commander");
+const chalk = require('chalk');
+const program = require('commander');
 
 type Color = (...text: string[]) => string;
 
@@ -35,7 +35,7 @@ function consoleError(...args: any[]) {
 function respectProgressBars(commitLogs: () => void) {
 	if (_bundleProgressBar) {
 		_bundleProgressBar.terminate();
-		_bundleProgressBar.lastDraw = "";
+		_bundleProgressBar.lastDraw = '';
 	}
 	if (_oraSpinner) {
 		_oraSpinner.stop();
@@ -176,25 +176,25 @@ log.showBanner = (appInfo: IAppInfo) => {
 	log.newLine();
 
 	log.gray(
-		"/====================v======================================================\\"
+		'/====================v======================================================\\'
 	);
 	log.gray(
-		"|     /////// ////// | AC FERRAMENTAS - Extensões para VS-Code e Node.JS    |"
+		'|     /////// ////// | AC FERRAMENTAS - Extensões para VS-Code e Node.JS    |'
 	);
 	log.gray(
-		"|    //   // //      | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |"
+		'|    //   // //      | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |'
 	);
 	log.gray(
-		"|   /////// //       |                                                      |"
+		'|   /////// //       |                                                      |'
 	);
 	log.gray(
-		"|  //   // //        | Ferramentas de apoio a desenvolvedores TOTVS         |"
+		'|  //   // //        | Ferramentas de apoio a desenvolvedores TOTVS         |'
 	);
 	log.gray(
-		"| //   // //////     | https://github.com/brodao/workspace/projects/AFPV    |"
+		'| //   // //////     | https://github.com/brodao/workspace/projects/AFPV    |'
 	);
 	log.gray(
-		"\\====================^======================================================/"
+		'\\====================^======================================================/'
 	);
 	log.gray(`${appInfo.name} [${appInfo.version}] ${appInfo.description}`);
 
