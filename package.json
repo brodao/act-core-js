@@ -14,12 +14,7 @@
 		"url": "https://github.com/brodao"
 	},
 	"contributors": [],
-	"keywords": [
-		"TDS",
-		"ADVPL",
-		"Protheus",
-		"Wizard"
-	],
+	"keywords": [],
 	"files": [
 		"lib"
 	],
@@ -34,9 +29,9 @@
 		"watch": "npm run build -- --watch",
 		"watch:test": "jest --watch",
 		"------": "",
-		"test": "jest",
+		"test": "npm run build && jest",
 		"test:snapshot": "npm test -- -u",
-		"test:coverage": "jest --coverage",
+		"test:coverage": "npm test -- --coverage",
 		"-------": "",
 		"prepare": "npm run format && npm run lint && npm run build && npm run test",
 		"release": "standard-version",
@@ -50,11 +45,11 @@
 		"act:link": "npm link ..\\act-jest-snapshot-console"
 	},
 	"dependencies": {
-		"@brodao/act-jest-snapshot-console": "^1.0.2",
 		"chalk": "^4.1.0",
 		"commander": "^6.0.0"
 	},
 	"devDependencies": {
+		"@brodao/act-jest-snapshot-console": "^1.0.2",
 		"@commitlint/cli": "^9.1.1",
 		"@commitlint/config-conventional": "^9.1.1",
 		"@types/jest": "^26.0.10",
@@ -87,19 +82,5 @@
 		"hooks": {
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
-	},
-	"funding": [
-		{
-			"type": "individual",
-			"url": "http://mpago.la/1sWXCjq"
-		},
-		{
-			"type": "individual",
-			"url": "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=265489088-d6ac3c3d-26ec-4b32-9e61-1a6f67f46880"
-		},
-		{
-			"type": "individual",
-			"url": "https://pagseguro.uol.com.br/checkout/nc/nl/donation/sender-identification.jhtml?t=ed1ce6a52728d7cc3f98b07dd597573b7db955e85faff6ff5da31c3d3b58266b&e=true#rmcl"
-		}
-	]
+	}
 }

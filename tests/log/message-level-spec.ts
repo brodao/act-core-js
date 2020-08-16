@@ -1,85 +1,73 @@
-import actLogger from "../../src/logger";
+import actLogger from '../../src/logger';
 
-const { wrap } = require("@brodao/act-jest-snapshot-console");
+const { wrap } = require('@brodao/act-jest-snapshot-console');
 
-test("Informação simples", () => {
-	expect(wrap(() => actLogger.gray("Informação simples"))).toMatchSnapshot();
+test('Informação simples', () => {
+	expect(wrap(() => actLogger.gray('Informação simples'))).toMatchSnapshot();
 });
 
-test("Informação com vários agumentos", () => {
+test('Informação com vários agumentos', () => {
 	expect(
 		wrap(() =>
-			actLogger.gray(
-				"Informação com argumentos",
-				"arg 1",
-				"arg 2",
-				"arg 3"
-			)
+			actLogger.gray('Informação com argumentos', 'arg 1', 'arg 2', 'arg 3')
 		)
 	).toMatchSnapshot();
 });
 
-test("Aviso simples", () => {
-	expect(wrap(() => actLogger.warn("Aviso simples"))).toMatchSnapshot();
+test('Aviso simples', () => {
+	expect(wrap(() => actLogger.warn('Aviso simples'))).toMatchSnapshot();
 });
 
-test("Aviso com vários agumentos", () => {
+test('Aviso com vários agumentos', () => {
 	expect(
 		wrap(() =>
-			actLogger.warn("Aviso com argumentos", "arg 1", "arg 2", "arg 3")
+			actLogger.warn('Aviso com argumentos', 'arg 1', 'arg 2', 'arg 3')
 		)
 	).toMatchSnapshot();
 });
 
-test("Erro simples", () => {
-	expect(wrap(() => actLogger.error("Erro simples"))).toMatchSnapshot();
+test('Erro simples', () => {
+	expect(wrap(() => actLogger.error('Erro simples'))).toMatchSnapshot();
 });
 
-test("Erro com vários agumentos", () => {
+test('Erro com vários agumentos', () => {
 	expect(
 		wrap(() =>
-			actLogger.error("Erro com argumentos", "arg 1", "arg 2", "arg 3")
+			actLogger.error('Erro com argumentos', 'arg 1', 'arg 2', 'arg 3')
 		)
 	).toMatchSnapshot();
 });
 
-test("Verbose simples", () => {
+test('Verbose simples', () => {
 	actLogger.config.verboseEnable = true;
 
-	expect(wrap(() => actLogger.verbose("Verbose simples"))).toMatchSnapshot();
+	expect(wrap(() => actLogger.verbose('Verbose simples'))).toMatchSnapshot();
 });
 
-test("Verbose com vários agumentos", () => {
+test('Verbose com vários agumentos', () => {
 	actLogger.config.verboseEnable = true;
 
 	expect(
 		wrap(() =>
-			actLogger.verbose("Informação com argumentos", {
-				"key 1": "arg 1",
-				"key 2": "arg 2",
-				"key 3": 3,
+			actLogger.verbose('Informação com argumentos', {
+				'key 1': 'arg 1',
+				'key 2': 'arg 2',
+				'key 3': 3,
 			})
 		)
 	).toMatchSnapshot();
 });
 
-test("Verbose desligado", () => {
+test('Verbose desligado', () => {
 	actLogger.config.verboseEnable = false;
 
-	expect(
-		wrap(() => actLogger.verbose("Verbose desligado"))
-	).toMatchSnapshot();
+	expect(wrap(() => actLogger.verbose('Verbose desligado'))).toMatchSnapshot();
 });
 
-test("Log com argumentos {}", () => {
+test('Log com argumentos {}', () => {
 	expect(
 		wrap(() =>
-			actLogger.gray(
-				"Log com argumentos {0}, {1}, {2}",
-				"arg 1",
-				"arg 2",
-				3
-			)
+			actLogger.gray('Log com argumentos {0}, {1}, {2}', 'arg 1', 'arg 2', 3)
 		)
 	).toMatchSnapshot();
 });
