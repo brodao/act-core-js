@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mensagem aninhada 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[90mMensagem aninhada[39m
+L:Linha 1
+L:Linha 2
+L:[90mMensagem desaninhada[39m
+",
+}
+`;

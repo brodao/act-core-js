@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aviso com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[33mAviso com argumentos[39m
+",
+}
+`;
+
+exports[`Aviso simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[33mAviso simples[39m
+",
+}
+`;
+
+exports[`Erro com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[31mErro com argumentos[39m
+",
+}
+`;
+
+exports[`Erro simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[31mErro simples[39m
+",
+}
+`;
+
+exports[`Informação com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[90mInformação com argumentos[39m
+",
+}
+`;
+
+exports[`Informação simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[90mInformação simples[39m
+",
+}
+`;
+
+exports[`Log com argumentos {} 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[90mLog com argumentos {0}, {1}, {2}[39m
+",
+}
+`;
+
+exports[`Verbose com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[33mInformação com argumentos[39m
+L:  key 1 [1marg 1[22m
+L:  key 2 [1marg 2[22m
+L:  key 3 [1m3[22m
+",
+}
+`;
+
+exports[`Verbose desligado 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Verbose simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "L:[90mVerbose simples[39m
+",
+}
+`;

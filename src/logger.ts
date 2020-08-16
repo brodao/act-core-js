@@ -1,7 +1,7 @@
 // @flow
 
-const chalk = require('chalk');
-const program = require('commander');
+const chalk = require("chalk");
+const program = require("commander");
 
 type Color = (...text: string[]) => string;
 
@@ -13,7 +13,7 @@ let _printNewLineBeforeNextLog = false;
 function _maybePrintNewLine() {
 	if (_printNewLineBeforeNextLog) {
 		_printNewLineBeforeNextLog = false;
-		console.log();
+		console.log("");
 	}
 }
 
@@ -24,18 +24,18 @@ function consoleLog(...args: any[]) {
 
 function consoleWarn(...args: any[]) {
 	_maybePrintNewLine();
-	console.warn(...args);
+	console.log(...args);
 }
 
 function consoleError(...args: any[]) {
 	_maybePrintNewLine();
-	console.error(...args);
+	console.log(...args);
 }
 
 function respectProgressBars(commitLogs: () => void) {
 	if (_bundleProgressBar) {
 		_bundleProgressBar.terminate();
-		_bundleProgressBar.lastDraw = '';
+		_bundleProgressBar.lastDraw = "";
 	}
 	if (_oraSpinner) {
 		_oraSpinner.stop();
@@ -70,8 +70,8 @@ function withPrefix(args: any[], chalkColor = chalk.gray) {
 	}
 }
 
-function log(...args: any[]) {
-	if (log.config.raw) {
+function actLogger(...args: any[]) {
+	if (actLogger.config.raw) {
 		return;
 	}
 
@@ -80,24 +80,24 @@ function log(...args: any[]) {
 	});
 }
 
-log.nested = (message: any) => {
+actLogger.nested = (message: any) => {
 	respectProgressBars(() => {
 		consoleLog(message);
 	});
 };
 
-log.newLine = function newLine() {
+actLogger.newLine = function newLine() {
 	respectProgressBars(() => {
-		consoleLog();
+		consoleLog("");
 	});
 };
 
-log.printNewLineBeforeNextLog = function printNewLineBeforeNextLog() {
+actLogger.printNewLineBeforeNextLog = function printNewLineBeforeNextLog() {
 	_printNewLineBeforeNextLog = true;
 };
 
-log.error = function error(...args: any[]) {
-	if (log.config.raw) {
+actLogger.error = function error(...args: any[]) {
+	if (actLogger.config.raw) {
 		return;
 	}
 
@@ -106,8 +106,8 @@ log.error = function error(...args: any[]) {
 	});
 };
 
-log.warn = function warn(...args: any[]) {
-	if (log.config.raw) {
+actLogger.warn = function warn(...args: any[]) {
+	if (actLogger.config.raw) {
 		return;
 	}
 
@@ -116,8 +116,8 @@ log.warn = function warn(...args: any[]) {
 	});
 };
 
-log.gray = (...args: any[]) => {
-	if (log.config.raw) {
+actLogger.gray = (...args: any[]) => {
+	if (actLogger.config.raw) {
 		return;
 	}
 
@@ -126,8 +126,8 @@ log.gray = (...args: any[]) => {
 	});
 };
 
-log.raw = (...args: any[]) => {
-	if (!log.config.raw) {
+actLogger.raw = (...args: any[]) => {
+	if (!actLogger.config.raw) {
 		return;
 	}
 
@@ -136,34 +136,27 @@ log.raw = (...args: any[]) => {
 	});
 };
 
-log.verboseOn = () => {
-	log.config.verboseEnable = true;
-};
-
-log.verboseOff = () => {
-	log.config.verboseEnable = false;
-};
-
-log.verbose = (text: string | string[], args?: any) => {
-	if (!log.config.verboseEnable) {
+actLogger.verbose = (text: string | string[], args?: any) => {
+	if (!actLogger.config.verboseEnable) {
 		return;
 	}
 
 	if (args) {
-		log.warn(text);
+		actLogger.warn(text);
 		Object.keys(args).forEach((key) => {
-			log.nested(`  ${key} ${chalk.bold(args[key])}`);
+			actLogger.nested(`  ${key} ${chalk.bold(args[key])}`);
 		});
 	} else {
-		log.gray(text);
+		actLogger.gray(text);
 	}
 };
 
-log.chalk = chalk;
+actLogger.chalk = chalk;
 
-log.config = {
+actLogger.config = {
 	raw: false,
 	verboseEnable: false,
+	showSplash: true,
 };
 
 export interface IAppInfo {
@@ -172,33 +165,39 @@ export interface IAppInfo {
 	description: string;
 }
 
-log.showBanner = (appInfo: IAppInfo) => {
-	log.newLine();
+actLogger.showBanner = (appInfo: IAppInfo) => {
+	if (!actLogger.config.showSplash) {
+		return;
+	}
 
-	log.gray(
-		'/====================v======================================================\\'
-	);
-	log.gray(
-		'|     /////// ////// | AC FERRAMENTAS - Extensões para VS-Code e Node.JS    |'
-	);
-	log.gray(
-		'|    //   // //      | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |'
-	);
-	log.gray(
-		'|   /////// //       |                                                      |'
-	);
-	log.gray(
-		'|  //   // //        | Ferramentas de apoio a desenvolvedores TOTVS         |'
-	);
-	log.gray(
-		'| //   // //////     | https://github.com/brodao/workspace/projects/AFPV    |'
-	);
-	log.gray(
-		'\\====================^======================================================/'
-	);
-	log.gray(`${appInfo.name} [${appInfo.version}] ${appInfo.description}`);
+	actLogger.newLine();
 
-	log.newLine();
+	actLogger.gray(
+		"/====================v======================================================\\"
+	);
+	actLogger.gray(
+		"|     /////// ////// | AC FERRAMENTAS - Extensões para VS-Code e Node.JS    |"
+	);
+	actLogger.gray(
+		"|    //   // //      | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |"
+	);
+	actLogger.gray(
+		"|   /////// //       |                                                      |"
+	);
+	actLogger.gray(
+		"|  //   // //        | Ferramentas de apoio a desenvolvedores TOTVS         |"
+	);
+	actLogger.gray(
+		"| //   // //////     | https://github.com/brodao/workspace/projects/AFPV    |"
+	);
+	actLogger.gray(
+		"\\====================^======================================================/"
+	);
+	actLogger.gray(
+		`${appInfo.name} [${appInfo.version}] ${appInfo.description}`
+	);
+
+	actLogger.newLine();
 };
 
-export default log;
+export default actLogger;

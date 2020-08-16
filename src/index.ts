@@ -1,2 +1,2 @@
 // @flow
-export * as log from './logger';
+export * from './logger';
