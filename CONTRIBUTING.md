@@ -19,7 +19,7 @@ Nossos sinceros agradecimentos vão para:
 
 ## Erros, falhas ou sugestões
 
-Caso encontre erros, comportamentos inesperados ou ainda tenha sugestões, entre em contato através de um [chamado](https://github.com/brodao/act-core-nod/issues?status=new&status=open). Isso vale tanto para a extensão, assim como ocorrências na documentação.
+Caso encontre erros, comportamentos inesperados ou ainda tenha sugestões, entre em contato através de um [chamado](https://github.com/brodao/act-core-js/issues?status=new&status=open). Isso vale tanto para a extensão, assim como ocorrências na documentação.
 
 ## Documentação
 
@@ -29,8 +29,8 @@ Caso encontre erros, comportamentos inesperados ou ainda tenha sugestões, entre
 
 ## Desenvovlimento
 
-1. Efetue um clone do respositório de [desenvolvimento](https://github.com/brodao/act-core-nod/src/developer/)
-2. Procure um [incidente](https://github.com/brodao/act-core-nod/issues?status=new&status=open) com que possa colaborar. Caso a sua colaboração não se enquadre em nenhum chamado, abra um descrevendo o que irá fazer.
+1. Efetue um clone do respositório de [desenvolvimento](https://github.com/brodao/act-core-js/src/developer/)
+2. Procure um [incidente](https://github.com/brodao/act-core-js/issues?status=new&status=open) com que possa colaborar. Caso a sua colaboração não se enquadre em nenhum chamado, abra um descrevendo o que irá fazer.
 3. Prepare testes automatizados para a reprodução da ocorrência;
 4. Codifique até o teste (item anterior) passar;
 5. Execute todo os testes, para evitar efeitos colaterais;

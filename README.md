@@ -1,9 +1,8 @@
 # AC Ferramentas: Núcleo (NodeJS)
 
-[![Build Status](https://travis-ci.org/brodao/act-core-nod.svg?branch=master)](https://www.travis-ci.org/github/brodao/act-core-nod)
-[![codecov](https://codecov.io/gh/brodao/act-core-nod/branch/master/graph/badge.svg)](https://codecov.io/gh/brodao/act-core-nod)
+[![Build Status](https://travis-ci.org/brodao/act-core-js.svg?branch=master)](https://www.travis-ci.org/github/brodao/act-core-js)
+[![codecov](https://codecov.io/gh/brodao/act-core-js/branch/master/graph/badge.svg)](https://codecov.io/gh/brodao/act-core-js)
 [![CC BY license](https://img.shields.io/badge/license-CC%20BY-%2327ad79)](https://creativecommons.org/licenses/by/4.0/)
-
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -15,7 +14,7 @@ Fornece infraestrutura para outros pacotes **AC Ferramentas**".
 ## Instalação
 
 ```terminal
-npm install --save-dev act-core-nod
+npm install --save-dev @brodao/act-core-js
 ```
 
 ## Uso
@@ -30,20 +29,27 @@ A extensão em si, é um sofware de fonte aberto, gratuíto e distribuí­do sob
 
 O suporte é efetuado exclusivamente via chamados e/ou consultando a documentação da ferramenta.
 
--   [chamados](https://github.com/brodao/act-core-nod/issues?status=new&status=open)
--   [documentação](https://github.com/brodao/act-core-nod/wiki/)
+-   [chamados](https://github.com/brodao/act-core-js/issues?status=new&status=open)
+-   [documentação](https://github.com/brodao/act-core-js/wiki/)
 
 ## Doação
 
 Ajude a manter gratuíto e aberto. Se o que disponibilizamos gratuitamente e de forma aberta esta sendo-lhe útil, considere efetuar uma contribuição por um dos meios indicados.
 
--   **Mercado Pago** Doação com valor a ser definido por você (somente cartão de crédito) [única](http://mpago.la/1sWXCjq) [3 meses](http://mpago.la/2WWNAp5) [6 meses](http://mpago.la/2WHLJ5S)
--   **Mercado Pago** Doação no valor de R\$20,00 (vários meios) [única](https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=265489088-d6ac3c3d-26ec-4b32-9e61-1a6f67f46880)
--   **PagSeguro** Doação com valor a ser definido por você (vários meios) [única](https://pagseguro.uol.com.br/checkout/nc/nl/donation/sender-identification.jhtml?t=ed1ce6a52728d7cc3f98b07dd597573b7db955e85faff6ff5da31c3d3b58266b&e=true#rmcl)
+-   **Mercado Pago** Doação com valor a ser definido por você (somente cartão de crédito):
+    * [contribuição única](http://mpago.la/1sWXCjq)
+    * [3 contribuições](http://mpago.la/2WWNAp5)
+    * [6 contribuições](http://mpago.la/2WHLJ5S)
+    
+-   **Mercado Pago** Doação no valor de R\$20,00 (vários meios)
+    * [contribuição única](https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=265489088-d6ac3c3d-26ec-4b32-9e61-1a6f67f46880)
+    
+-   **PagSeguro** Doação com valor a ser definido por você (vários meios)
+    * [contribuição única](https://pagseguro.uol.com.br/checkout/nc/nl/donation/sender-identification.jhtml?t=ed1ce6a52728d7cc3f98b07dd597573b7db955e85faff6ff5da31c3d3b58266b&e=true#rmcl)
 
 ## <a name=contributors>Colaboradores</a>
 
-> O trabalho é voluntário e não concede nenhum direito/privilégio, incluindo eventuais ganhos pecuniários. Veja [CONTRIBUTING](CONTRIBUTING.MD) para saber mais.
+> O trabalho é voluntário e não concede nenhum direito/privilégio, incluindo eventuais ganhos pecuniários. Veja [Colaborando](CONTRIBUTING.MD) para saber mais.
 
 Nossos sinceros agradecimentos vão para:
 

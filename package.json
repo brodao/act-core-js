@@ -1,12 +1,12 @@
 {
-	"name": "@brodao/act-core-nod",
+	"name": "@brodao/act-core-js",
 	"version": "0.0.1",
 	"description": "Rotinas de uso geral.",
 	"license": "SEE LICENSE IN LICENSE",
-	"homepage": "https://github.com/brodao/act-core-nod",
+	"homepage": "https://github.com/brodao/act-core-js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/brodao/act-core-nod.git"
+		"url": "https://github.com/brodao/act-core-js.git"
 	},
 	"author": {
 		"name": "Alan Cândido",
@@ -28,21 +28,19 @@
 		"build": "tsc --pretty",
 		"watch": "npm run build -- --watch",
 		"watch:test": "jest --watch",
-		"------": "",
+		"-- TEST --": "",
 		"test": "npm run build && jest",
 		"test:snapshot": "npm test -- -u",
 		"test:coverage": "npm test -- --coverage",
-		"-------": "",
+		"-- PUBLISH --": "",
 		"prepare": "npm run format && npm run lint && npm run build && npm run test",
 		"release": "standard-version",
-		"release:rc": "npm run release -- --prerelease rc",
 		"tag": "git push --follow-tags",
 		"prepublishOnly": "npm run test",
 		"publish": "npm publish",
-		"--------": "",
+		"-- MISC --": "",
 		"contributors:add": "all-contributors add",
-		"contributors:generate": "all-contributors generate",
-		"act:link": "npm link ..\\act-jest-snapshot-console"
+		"contributors:generate": "all-contributors generate"
 	},
 	"dependencies": {
 		"chalk": "^4.1.0",
