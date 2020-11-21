@@ -28,7 +28,7 @@ function consoleWarn(...args: any[]) {
 
 function consoleError(...args: any[]) {
 	_maybePrintNewLine();
-	console.log(...args);
+	console.error(...args);
 }
 
 function respectProgressBars(commitLogs: () => void) {

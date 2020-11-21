@@ -19,7 +19,7 @@ Object {
 exports[`Erro com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[31mErro com argumentos[39m
+  Symbol(act-jest-snapshot-console): "E:[31mErro com argumentos[39m
 ",
 }
 `;
@@ -27,7 +27,7 @@ Object {
 exports[`Erro simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[31mErro simples[39m
+  Symbol(act-jest-snapshot-console): "E:[31mErro simples[39m
 ",
 }
 `;
