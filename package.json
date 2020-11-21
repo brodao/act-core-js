@@ -1,7 +1,7 @@
 {
 	"name": "@brodao/act-core-nod",
 	"version": "0.0.1",
-	"description": "Rotinas de uso geral, compartilhadas com outros projetos 'AC Ferramentas'.",
+	"description": "Rotinas de uso geral.",
 	"license": "SEE LICENSE IN LICENSE",
 	"homepage": "https://github.com/brodao/act-core-nod",
 	"repository": {
