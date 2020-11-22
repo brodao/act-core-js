@@ -74,6 +74,7 @@ function withPrefix(args: any[], chalkColor = actLogger.chalk.gray) {
 }
 
 function adjustRaw() {
+	// @ts-expect-error
 	actLogger.chalk = actLogger.config.raw ? chalkRaw : chalk;
 }
 
