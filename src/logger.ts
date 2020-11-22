@@ -1,5 +1,6 @@
-const chalk = require('chalk');
-const program = require('commander');
+import * as chalk from 'chalk';
+import * as program from 'commander';
+// @ts-ignore
 const chalkRaw = new chalk.Instance({ raw: ['bold', {}], level: 0 });
 
 type Color = (...text: string[]) => string;
