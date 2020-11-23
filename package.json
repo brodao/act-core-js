@@ -37,7 +37,7 @@
 		"release": "standard-version",
 		"tag": "git push --follow-tags",
 		"prepublishOnly": "npm run test",
-		"publish": "npm publish",
+		"to_publish": "npm publish",
 		"-- MISC --": "",
 		"contributors:add": "all-contributors add",
 		"contributors:generate": "all-contributors generate"
@@ -45,6 +45,7 @@
 	"dependencies": {
 		"chalk": "^4.1.0",
 		"commander": "^6.2.0",
+		"ora": "^5.1.0",
 		"strip-json-comments": "^3.1.1"
 	},
 	"devDependencies": {

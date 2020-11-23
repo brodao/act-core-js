@@ -1,5 +1,6 @@
 import * as chalk from 'chalk';
 import * as program from 'commander';
+import ora from 'ora';
 // @ts-ignore
 const chalkRaw = new chalk.Instance({ raw: ['bold', {}], level: 0 });
 
@@ -56,7 +57,7 @@ function getPrefix(chalkColor: Color) {
 
 function withPrefixAndTextColor(
 	args: any[],
-	chalkColor: Color = actLogger.chalk.gray
+	chalkColor: Color = act_logger.chalk.gray
 ) {
 	if (program.nonInteractive) {
 		return [getPrefix(chalkColor), ...args.map((arg) => chalkColor(arg))];
@@ -65,7 +66,7 @@ function withPrefixAndTextColor(
 	}
 }
 
-function withPrefix(args: any[], chalkColor = actLogger.chalk.gray) {
+function withPrefix(args: any[], chalkColor = act_logger.chalk.gray) {
 	if (program.nonInteractive) {
 		return [getPrefix(chalkColor), ...args];
 	} else {
@@ -75,10 +76,10 @@ function withPrefix(args: any[], chalkColor = actLogger.chalk.gray) {
 
 function adjustRaw() {
 	// @ts-expect-error
-	actLogger.chalk = actLogger.config.raw ? chalkRaw : chalk;
+	act_logger.chalk = act_logger.config.raw ? chalkRaw : chalk;
 }
 
-function actLogger(...args: any[]) {
+function act_logger(...args: any[]) {
 	adjustRaw();
 
 	respectProgressBars(() => {
@@ -86,39 +87,39 @@ function actLogger(...args: any[]) {
 	});
 }
 
-actLogger.nested = (message: any) => {
+act_logger.nested = (message: any) => {
 	respectProgressBars(() => {
 		consoleLog(message);
 	});
 };
 
-actLogger.newLine = function newLine() {
+act_logger.newLine = function newLine() {
 	respectProgressBars(() => {
 		consoleLog('');
 	});
 };
 
-actLogger.printNewLineBeforeNextLog = function printNewLineBeforeNextLog() {
+act_logger.printNewLineBeforeNextLog = function printNewLineBeforeNextLog() {
 	_printNewLineBeforeNextLog = true;
 };
 
-actLogger.error = function error(...args: any[]) {
+act_logger.error = function error(...args: any[]) {
 	adjustRaw();
 
 	respectProgressBars(() => {
-		consoleError(...withPrefixAndTextColor(args, actLogger.chalk.red));
+		consoleError(...withPrefixAndTextColor(args, act_logger.chalk.red));
 	});
 };
 
-actLogger.warn = function warn(...args: any[]) {
+act_logger.warn = function warn(...args: any[]) {
 	adjustRaw();
 
 	respectProgressBars(() => {
-		consoleWarn(...withPrefixAndTextColor(args, actLogger.chalk.yellow));
+		consoleWarn(...withPrefixAndTextColor(args, act_logger.chalk.yellow));
 	});
 };
 
-actLogger.gray = (...args: any[]) => {
+act_logger.gray = (...args: any[]) => {
 	adjustRaw();
 
 	respectProgressBars(() => {
@@ -126,24 +127,24 @@ actLogger.gray = (...args: any[]) => {
 	});
 };
 
-actLogger.verbose = (text: string | string[], args?: any) => {
-	if (!actLogger.config.verboseEnable) {
+act_logger.verbose = (text: string | string[], args?: any) => {
+	if (!act_logger.config.verboseEnable) {
 		return;
 	}
 
 	if (args) {
-		actLogger.warn(text);
+		act_logger.warn(text);
 		Object.keys(args).forEach((key) => {
-			actLogger.nested(`  ${key} ${actLogger.chalk.bold(args[key])}`);
+			act_logger.nested(`  ${key} ${act_logger.chalk.bold(args[key])}`);
 		});
 	} else {
-		actLogger.gray(text);
+		act_logger.gray(text);
 	}
 };
 
-actLogger.chalk = chalk;
+act_logger.chalk = chalk;
 
-actLogger.config = {
+act_logger.config = {
 	raw: false,
 	verboseEnable: false,
 	showSplash: true,
@@ -161,7 +162,7 @@ const appText = (
 	description: string
 ): string[] => {
 	return [
-		`${actLogger.chalk.bold('AC TOOLS')} - Extensions for VS-Code and NodeJS`,
+		`${act_logger.chalk.bold('AC TOOLS')} - Extensions for VS-Code and NodeJS`,
 		'See https://github.com/brodao/workspace/projects/AFPV',
 		`${name} [${version}] ${description}`,
 	];
@@ -172,7 +173,7 @@ const banner = (
 	version: string,
 	description: string
 ): string[] => {
-	const b = actLogger.chalk.bold;
+	const b = act_logger.chalk.bold;
 	return [
 		'/====================v======================================================\\',
 		`| ${b('    /////// //////')} | ${b(
@@ -195,22 +196,28 @@ const banner = (
 	];
 };
 
-actLogger.showBanner = (appInfo: IAppInfo) => {
+act_logger.showBanner = (appInfo: IAppInfo) => {
 	adjustRaw();
 
-	if (!actLogger.config.showSplash) {
+	if (!act_logger.config.showSplash) {
 		appText(
 			appInfo.name,
 			appInfo.version,
 			appInfo.description
-		).forEach((line: string) => actLogger.gray(line));
+		).forEach((line: string) => act_logger.gray(line));
 	} else {
 		banner(
 			appInfo.name,
 			appInfo.version,
 			appInfo.description
-		).forEach((line: string) => actLogger.gray(line));
+		).forEach((line: string) => act_logger.gray(line));
 	}
 };
 
-export default actLogger;
+act_logger.logNewSection = (title: string) => {
+	let spinner = ora(chalk.bold(title));
+	spinner.start();
+	return spinner;
+};
+
+export default act_logger;
