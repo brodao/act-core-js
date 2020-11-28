@@ -1,3 +1,16 @@
-export * as act_jsonFile from './jsonFile';
-export * as act_command from './command';
-export * from './logger';
+import * as _act_command from './command';
+import * as _act_logger from './logger';
+
+//export const act_jsonFile = _act_jsonFile;
+
+export interface IACTModule {
+	command: any;
+	logger: any;
+}
+
+const ACT: IACTModule = {
+	command: _act_command,
+	logger: _act_logger,
+};
+
+export { ACT };

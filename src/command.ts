@@ -1,16 +1,8 @@
-import chalk from 'chalk';
-import commander, { Command } from 'commander';
-import act_logger from './logger';
-
-export interface ICommandOptions {
-	name: string;
-	version?: string;
-	commandText?: string;
-	optionsText?: string;
-}
+import commander from 'commander';
+import { ICommandOptions } from './model/model_interfaces';
 
 export function newCommand(commandOptions: ICommandOptions): commander.Command {
-	const command: commander.Command = new Command(commandOptions.name);
+	const command: commander.Command = new commander.Command(commandOptions.name);
 
 	if (commandOptions.version) {
 		command.version(commandOptions.version);
@@ -19,13 +11,9 @@ export function newCommand(commandOptions: ICommandOptions): commander.Command {
 	if (commandOptions.commandText || commandOptions.optionsText) {
 		let usageText: string = '';
 
-		usageText += commandOptions.commandText
-			? chalk.magenta(commandOptions.commandText) + ' '
-			: '';
+		usageText += commandOptions.commandText;
 		usageText += commandOptions.optionsText ? commandOptions.optionsText : '';
-		usageText += commandOptions.optionsText
-			? chalk.yellowBright(commandOptions.optionsText) + ' '
-			: '';
+		usageText += commandOptions.optionsText;
 
 		command.usage(usageText);
 	}
@@ -33,13 +21,13 @@ export function newCommand(commandOptions: ICommandOptions): commander.Command {
 	return command;
 }
 
-export async function commandDidThrowAsync(error: any, exitCode?: number) {
-	act_logger.newLine();
-	act_logger.nested(chalk.red(`An unexpected error occurred:`));
-	act_logger.nested(error);
-	act_logger.newLine();
+// export async function commandDidThrowAsync(error: any, exitCode?: number) {
+// 	act_logger.newLine();
+// 	act_logger.nested(chalk.red(`An unexpected error occurred:`));
+// 	act_logger.nested(error);
+// 	act_logger.newLine();
 
-	if (exitCode) {
-		process.exit(1);
-	}
-}
+// 	if (exitCode) {
+// 		process.exit(1);
+// 	}
+// }
