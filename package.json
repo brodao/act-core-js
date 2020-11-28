@@ -1,15 +1,16 @@
 {
 	"name": "@brodao/act-core-js",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Rotinas de uso geral.",
 	"license": "SEE LICENSE IN LICENSE",
 	"homepage": "https://github.com/brodao/act-core-js",
-	"type": "commonjs",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/brodao/act-core-js.git"
 	},
+	"type": "commonjs",
 	"main": "./lib/index.js",
+	"types": "./lib/index.d.ts",
 	"author": {
 		"name": "Alan Cândido",
 		"email": "brodao@gmail.com",
