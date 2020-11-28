@@ -1,7 +1,10 @@
+// export * from './command';
+// export * from './logger';
+
 import * as _act_command from './command';
 import * as _act_logger from './logger';
 
-//export const act_jsonFile = _act_jsonFile;
+// export const act_jsonFile = _act_jsonFile;
 
 export interface IACTModule {
 	command: any;
@@ -14,3 +17,8 @@ const ACT: IACTModule = {
 };
 
 export { ACT };
+
+// module ACT {
+// 	export const _act_command as ACTCommand,
+
+// }

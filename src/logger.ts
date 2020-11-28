@@ -1,7 +1,7 @@
 import winston from 'winston';
 import { IAppInfo, ILoggerConfig } from './model/model_interfaces';
 
-const __logger = winston.createLogger({
+const defaultLogger = winston.createLogger({
 	level: 'info',
 	format: winston.format.json(),
 	defaultMeta: { service: 'user-service' },
@@ -20,7 +20,7 @@ const __logger = winston.createLogger({
 // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
 //
 if (process.env.NODE_ENV !== 'production') {
-	__logger.add(
+	defaultLogger.add(
 		new winston.transports.Console({
 			format: winston.format.simple(),
 		})
@@ -111,14 +111,14 @@ class Logger {
 	}
 }
 
-let _loggerMap: Map<string, Logger> = new Map<string, Logger>();
-_loggerMap.set('', new Logger());
+const loggerMap: Map<string, Logger> = new Map<string, Logger>();
+loggerMap.set('', new Logger());
 
 export function logger(id: string = ''): Logger | undefined {
-	return _loggerMap.get(id);
+	return loggerMap.get(id);
 }
 
 export function createLogger(id: string): Logger | undefined {
-	_loggerMap.set(id, new Logger());
+	loggerMap.set(id, new Logger());
 	return logger(id);
 }

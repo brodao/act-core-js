@@ -1,14 +1,13 @@
 {
 	"compilerOptions": {
-		"moduleResolution": "node",
 		"declaration": true,
-		"module": "ES6",
-		"lib": ["ES6", "DOM"],
-		"target": "ES6",
+		"module": "CommonJS",
+		"lib": ["esnext", "DOM"],
+		"target": "ES2020",
 		"outDir": "./lib",
-		"types": [ "jest" ],
-		"declarationDir": "./types",
-		"mapRoot": "./map",
+		"types": ["jest"],
+		"declarationDir": "./lib",
+		"mapRoot": "./lib",
 		"declarationMap": true,
 		"forceConsistentCasingInFileNames": true,
 		"removeComments": true,
@@ -22,8 +21,11 @@
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
+		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"isolatedModules": true,
+		"typeRoots": ["./node_modules/@types"]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "**/*-spec.ts"]
