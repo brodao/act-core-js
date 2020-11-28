@@ -1,6 +1,6 @@
 {
 	"name": "@brodao/act-core-js",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Rotinas de uso geral.",
 	"license": "SEE LICENSE IN LICENSE",
 	"homepage": "https://github.com/brodao/act-core-js",
@@ -28,8 +28,8 @@
 		"build": "tsc -p .",
 		"watch": "npm run build -- --watch",
 		"watch:test": "jest --watch",
-		"-- TEST --": "",
-		"test": "npm run build && jest -- --passWithNoTests",
+		"-- TEST --": "npm run build && jest -- --passWithNoTests",
+		"test": "",
 		"test:snapshot": "npm test -- -u",
 		"test:coverage": "npm test -- --coverage",
 		"-- PUBLISH --": "",
