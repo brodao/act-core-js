@@ -1,7 +1,7 @@
-import { actCommander } from "./command";
-import { actLogger, getLogger } from "./logger";
-import { actJson } from "./jsonFile";
-import { ICommander, IJsonFile, ILogger } from "./model/model_interfaces";
+import { actCommander } from './command';
+import { actLogger, getLogger } from './logger';
+import { actJson } from './jsonFile';
+import { ICommander, IJsonFile, ILogger } from './model/model_interfaces';
 
 export interface IACTModule {
 	commander: ICommander;
