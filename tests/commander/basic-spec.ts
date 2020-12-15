@@ -5,10 +5,14 @@ const { wrap } = require('@brodao/act-jest-snapshot-console');
 test('Mensagem aninhada', () => {
 	expect(
 		wrap(() => {
-			ACT.logger.log('Mensagem aninhada');
-			ACT.logger.nested('Linha 1');
-			ACT.logger.nested('Linha 2');
-			ACT.logger.log('Mensagem desaninhada');
+			const cmd = ACT.commander.newCommand({
+				name: 'app_commander_test',
+				commandText: true,
+				optionsText: true,
+				version: '99.99.99',
+			});
+
+			return cmd.helpInformation();
 		})
 	).toMatchSnapshot();
 });

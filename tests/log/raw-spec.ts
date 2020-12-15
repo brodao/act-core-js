@@ -1,20 +1,20 @@
-import actLogger from '../../src/logger';
+import ACT from '../../lib/index';
 
 const { wrap } = require('@brodao/act-jest-snapshot-console');
 
 beforeEach(() => {
-	actLogger.config.raw = true;
+	ACT.logger.config.raw = true;
 });
 
 afterEach(() => {
-	actLogger.config.raw = false;
+	ACT.logger.config.raw = false;
 });
 
 describe('Console em texto puro', () => {
 	test("Apresenta o 'splash'", () => {
 		expect(
 			wrap(() =>
-				actLogger.showBanner({
+				ACT.logger.showBanner({
 					name: 'test_show_banner',
 					version: '99.99.99',
 					description: 'Show Banner',
@@ -24,25 +24,25 @@ describe('Console em texto puro', () => {
 	});
 
 	test('Aviso simples', () => {
-		expect(wrap(() => actLogger.warn('Aviso simples'))).toMatchSnapshot();
+		expect(wrap(() => ACT.logger.warn('Aviso simples'))).toMatchSnapshot();
 	});
 
 	test('Aviso com vários agumentos', () => {
 		expect(
 			wrap(() =>
-				actLogger.warn('Aviso com argumentos', 'arg 1', 'arg 2', 'arg 3')
+				ACT.logger.warn('Aviso com argumentos', 'arg 1', 'arg 2', 'arg 3')
 			)
 		).toMatchSnapshot();
 	});
 
 	test('Erro simples', () => {
-		expect(wrap(() => actLogger.error('Erro simples'))).toMatchSnapshot();
+		expect(wrap(() => ACT.logger.error('Erro simples'))).toMatchSnapshot();
 	});
 
 	test('Erro com vários agumentos', () => {
 		expect(
 			wrap(() =>
-				actLogger.error('Erro com argumentos', 'arg 1', 'arg 2', 'arg 3')
+				ACT.logger.error('Erro com argumentos', 'arg 1', 'arg 2', 'arg 3')
 			)
 		).toMatchSnapshot();
 	});

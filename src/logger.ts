@@ -1,19 +1,27 @@
-import winston from 'winston';
-import { IAppInfo, ILoggerConfig } from './model/model_interfaces';
+import { IAppInfo, ILogger, ILoggerConfig } from './model/model_interfaces';
+import * as winston from 'winston';
+import * as os from 'os';
 
-const defaultLogger = winston.createLogger({
+const outDir: string = os.homedir(); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
+const defaultFormat = winston.format.printf(
+	({ level, message, label, timestamp }) => {
+		return `${timestamp} [${label}] ${level}: ${message}`;
+	}
+);
+const options: winston.LoggerOptions = {
 	level: 'info',
-	format: winston.format.json(),
-	defaultMeta: { service: 'user-service' },
+	format: winston.format.combine(
+		winston.format.label({ label: 'right meow!' }),
+		winston.format.timestamp(),
+		defaultFormat
+	),
 	transports: [
-		//
-		// - Write all logs with level `error` and below to `error.log`
-		// - Write all logs with level `info` and below to `combined.log`
-		//
-		new winston.transports.File({ filename: 'error.log', level: 'error' }),
-		new winston.transports.File({ filename: 'combined.log' }),
+		new winston.transports.Console(),
+		new winston.transports.File({ filename: `${outDir} combined.log` }),
 	],
-});
+};
+
+const defaultLogger: winston.Logger = winston.createLogger(options); //
 
 //
 // If we're not in production then log to the `console` with the format:
@@ -27,7 +35,7 @@ if (process.env.NODE_ENV !== 'production') {
 	);
 }
 
-class Logger {
+class Logger implements ILogger {
 	config: ILoggerConfig = {
 		raw: false,
 		verboseEnable: false,
@@ -46,8 +54,12 @@ class Logger {
 		console.error(...args);
 	}
 
-	nested(message: any) {
+	nested(message: string) {
 		console.error('> ' + message);
+	}
+
+	newLine() {
+		console.log('');
 	}
 
 	error(...args: any[]) {
@@ -111,14 +123,17 @@ class Logger {
 	}
 }
 
-const loggerMap: Map<string, Logger> = new Map<string, Logger>();
-loggerMap.set('', new Logger());
+const loggerMap: Map<string, ILogger> = new Map<string, ILogger>();
 
-export function logger(id: string = ''): Logger | undefined {
-	return loggerMap.get(id);
+export const actLogger: ILogger = getLogger('_act_');
+
+export function getLogger(id: string): ILogger {
+	return loggerMap.get(id) || createLogger(id);
 }
 
-export function createLogger(id: string): Logger | undefined {
-	loggerMap.set(id, new Logger());
-	return logger(id);
+function createLogger(id: string): ILogger {
+	const newLogger:ILogger = new Logger();
+	loggerMap.set(id, newLogger);
+
+	return newLogger;
 }

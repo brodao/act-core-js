@@ -3,7 +3,7 @@
 exports[`Aviso com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[33mAviso com argumentos[39m
+  Symbol(act-jest-snapshot-console): "L:Aviso com argumentos,arg 1,arg 2,arg 3
 ",
 }
 `;
@@ -11,7 +11,7 @@ Object {
 exports[`Aviso simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[33mAviso simples[39m
+  Symbol(act-jest-snapshot-console): "L:Aviso simples
 ",
 }
 `;
@@ -19,7 +19,7 @@ Object {
 exports[`Erro com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "E:[31mErro com argumentos[39m
+  Symbol(act-jest-snapshot-console): "E:Erro com argumentos,arg 1,arg 2,arg 3
 ",
 }
 `;
@@ -27,7 +27,7 @@ Object {
 exports[`Erro simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "E:[31mErro simples[39m
+  Symbol(act-jest-snapshot-console): "E:Erro simples
 ",
 }
 `;
@@ -35,7 +35,7 @@ Object {
 exports[`Informação com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[90mInformação com argumentos[39m
+  Symbol(act-jest-snapshot-console): "L:Informação com argumentos,arg 1,arg 2,arg 3
 ",
 }
 `;
@@ -43,7 +43,7 @@ Object {
 exports[`Informação simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[90mInformação simples[39m
+  Symbol(act-jest-snapshot-console): "L:Informação simples
 ",
 }
 `;
@@ -51,7 +51,7 @@ Object {
 exports[`Log com argumentos {} 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[90mLog com argumentos {0}, {1}, {2}[39m
+  Symbol(act-jest-snapshot-console): "L:Log com argumentos {0}, {1}, {2},arg 1,arg 2,3
 ",
 }
 `;
@@ -59,10 +59,10 @@ Object {
 exports[`Verbose com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[33mInformação com argumentos[39m
-L:  key 1 [1marg 1[22m
-L:  key 2 [1marg 2[22m
-L:  key 3 [1m3[22m
+  Symbol(act-jest-snapshot-console): "L:Informação com argumentos
+E:>   key 1 arg 1
+E:>   key 2 arg 2
+E:>   key 3 3
 ",
 }
 `;
@@ -70,14 +70,15 @@ L:  key 3 [1m3[22m
 exports[`Verbose desligado 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "L:Verbose desligado
+",
 }
 `;
 
 exports[`Verbose simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "L:[90mVerbose simples[39m
+  Symbol(act-jest-snapshot-console): "L:Verbose simples
 ",
 }
 `;

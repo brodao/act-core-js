@@ -1,24 +1,22 @@
-// export * from './command';
-// export * from './logger';
-
-import * as _act_command from './command';
-import * as _act_logger from './logger';
-
-// export const act_jsonFile = _act_jsonFile;
+import { actCommander } from "./command";
+import { actLogger, getLogger } from "./logger";
+import { actJson } from "./jsonFile";
+import { ICommander, IJsonFile, ILogger } from "./model/model_interfaces";
 
 export interface IACTModule {
-	command: any;
-	logger: any;
+	commander: ICommander;
+	logger: ILogger;
+	getLogger: (id: string) => ILogger;
+	jsonFile: IJsonFile;
 }
 
 const ACT: IACTModule = {
-	command: _act_command,
-	logger: _act_logger,
+	commander: actCommander,
+	logger: actLogger,
+	getLogger: (id: string): ILogger => {
+		return getLogger(id.toLowerCase());
+	},
+	jsonFile: actJson,
 };
 
-export { ACT };
-
-// module ACT {
-// 	export const _act_command as ACTCommand,
-
-// }
+export default ACT;

@@ -1,14 +1,14 @@
-import actLogger from '../../src/logger';
+import ACT from '../../lib/index';
 
 const { wrap } = require('@brodao/act-jest-snapshot-console');
 
 describe("Testa a apresentação ou não do 'splash' completo", () => {
 	test("Apresenta o 'splash'", () => {
-		actLogger.config.showSplash = true;
+		ACT.logger.config.showSplash = true;
 
 		expect(
 			wrap(() =>
-				actLogger.showBanner({
+				ACT.logger.showBanner({
 					name: 'test_show_banner',
 					version: '99.99.99',
 					description: 'Show Banner',
@@ -18,11 +18,11 @@ describe("Testa a apresentação ou não do 'splash' completo", () => {
 	});
 
 	test("Apresenta um 'splash' simples de identificação", () => {
-		actLogger.config.showSplash = false;
+		ACT.logger.config.showSplash = false;
 
 		expect(
 			wrap(() =>
-				actLogger.showBanner({
+				ACT.logger.showBanner({
 					name: 'test_show_banner',
 					version: '99.99.99',
 					description: 'Show Banner',

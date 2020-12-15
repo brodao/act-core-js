@@ -13,8 +13,9 @@ Nossos sinceros agradecimentos vão para:
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Erros, falhas ou sugestões
