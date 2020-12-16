@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mensagem aninhada 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;

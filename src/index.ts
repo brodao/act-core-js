@@ -1,20 +1,25 @@
 import { actCommander } from './command';
 import { actLogger, getLogger } from './logger';
 import { actJson } from './jsonFile';
-import { ICommander, IJsonFile, ILogger } from './model/model_interfaces';
+import {
+	ICommander,
+	IJsonFile,
+	ILogger,
+	ILoggerConfig,
+} from './model/model_interfaces';
 
 export interface IACTModule {
 	commander: ICommander;
 	logger: ILogger;
-	getLogger: (id: string) => ILogger;
+	getLogger: (id: string, config?: ILoggerConfig) => ILogger;
 	jsonFile: IJsonFile;
 }
 
 const ACT: IACTModule = {
 	commander: actCommander,
 	logger: actLogger,
-	getLogger: (id: string): ILogger => {
-		return getLogger(id.toLowerCase());
+	getLogger: (id: string, config?: ILoggerConfig): ILogger => {
+		return getLogger(id.toLowerCase(), config);
 	},
 	jsonFile: actJson,
 };

@@ -4,7 +4,7 @@ const { wrap } = require('@brodao/act-jest-snapshot-console');
 
 describe("Testa a apresentação ou não do 'splash' completo", () => {
 	test("Apresenta o 'splash'", () => {
-		ACT.logger.config.showSplash = true;
+		ACT.logger._config.showBanner = true;
 
 		expect(
 			wrap(() =>
@@ -18,7 +18,7 @@ describe("Testa a apresentação ou não do 'splash' completo", () => {
 	});
 
 	test("Apresenta um 'splash' simples de identificação", () => {
-		ACT.logger.config.showSplash = false;
+		ACT.logger._config.showBanner = false;
 
 		expect(
 			wrap(() =>

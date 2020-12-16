@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mensagem aninhada 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): "Usage: app_commander_test [command] [options]
+
+Options:
+  -V, --version  output the version number
+  -v, --verbose  detalha a execução (default: true)
+  --no-banner    omite a abertura
+  -h, --help     display help for command
+",
+  Symbol(act-jest-snapshot-console): "",
+}
+`;

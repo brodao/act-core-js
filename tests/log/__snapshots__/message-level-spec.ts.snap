@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aviso com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Aviso simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Erro com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Erro simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Informação com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Informação simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Log com argumentos {} 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Verbose com vários agumentos 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Verbose desligado 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
+
+exports[`Verbose simples 1`] = `
+Object {
+  Symbol(act-jest-snapshot-raw): undefined,
+  Symbol(act-jest-snapshot-console): "",
+}
+`;
