@@ -1,36 +1,29 @@
 import * as tmp from 'tmp';
-import ACT from '../../lib/index';
+import { ACT } from '../../lib';
 
-describe('Testa a leitura de arquivos JSON', () => {
+describe('Testa a manipulação JSON', () => {
 	test('Arquivo inexistente', () => {
 		expect(() => {
-			ACT.jsonFile.from('not_exist_file.json');
+			ACT.json.fromFile('not_exist_file.json');
 		}).toThrow();
 	});
 
 	test('Leitura de um objeto JSON simples', () => {
 		const jsonContent: any = { message: 'This is a message' };
 		const file: tmp.FileResult = tmp.fileSync();
-		ACT.jsonFile.to(jsonContent, file.name, true);
+		ACT.json.toFile(jsonContent, file.name, true);
 
-		expect(JSON.stringify(ACT.jsonFile.from(file.name))).toBe(
+		expect(JSON.stringify(ACT.json.fromFile(file.name))).toBe(
 			JSON.stringify(jsonContent)
 		);
 	});
-});
 
-let jsonFile: string;
-
-describe('Testa a gravação de arquivos JSON', () => {
-	beforeAll(() => {
-		jsonFile = tmp.tmpNameSync();
-	});
-
+	const jsonFile = tmp.tmpNameSync();
 	test('Gravação de um objeto JSON simples', () => {
 		const jsonContent: any = { message: 'This is a message' };
 
 		expect(() => {
-			ACT.jsonFile.to(jsonContent, jsonFile);
+			ACT.json.toFile(jsonContent, jsonFile);
 		}).not.toThrow();
 	});
 
@@ -38,7 +31,7 @@ describe('Testa a gravação de arquivos JSON', () => {
 		const jsonContent: any = { message: 'This is a message' };
 
 		expect(() => {
-			ACT.jsonFile.to(jsonContent, jsonFile, true);
+			ACT.json.toFile(jsonContent, jsonFile, true);
 		}).not.toThrow();
 	});
 
@@ -46,7 +39,7 @@ describe('Testa a gravação de arquivos JSON', () => {
 		const jsonContent: any = { message: 'This is a message' };
 
 		expect(() => {
-			ACT.jsonFile.to(jsonContent, jsonFile, false);
+			ACT.json.toFile(jsonContent, jsonFile, false);
 		}).toThrow();
 	});
 });

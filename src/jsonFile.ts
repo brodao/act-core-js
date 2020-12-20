@@ -1,8 +1,7 @@
 import * as fs from 'fs';
-import { IJsonFile } from './model/model_interfaces';
 const stripJsonComments = require('strip-json-comments');
 
-function fromFile(file: string): JSON {
+export function jsonFromFile(file: string): JSON {
 	let content: any = {};
 
 	if (!fs.existsSync(file)) {
@@ -22,19 +21,10 @@ function fromFile(file: string): JSON {
 	return content;
 }
 
-function toFile(content: JSON, file: string, overwrite: boolean) {
+export function jsonToFile(content: JSON, file: string, overwrite: boolean) {
 	if (fs.existsSync(file) && !overwrite) {
-		throw new Error('File alredy exisist.');
+		throw new Error(`File [${file}] alredy exisist. `);
 	}
 
 	fs.writeFileSync(file, JSON.stringify(content));
 }
-
-export const actJson: IJsonFile = {
-	from: (file: string): JSON => {
-		return fromFile(file);
-	},
-	to: (content: JSON, file: string, overwrite: boolean = false) => {
-		toFile(content, file, overwrite);
-	},
-};

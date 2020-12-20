@@ -1,6 +1,6 @@
-import { IAppInfo, ILogger, ILoggerConfig } from './model/model_interfaces';
 import * as winston from 'winston';
 import * as os from 'os';
+import { IAppInfo, ILogger, ILoggerConfig } from './interfaces';
 
 const outDir: string = os.homedir(); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
 const defaultFormat = winston.format.printf(
@@ -8,6 +8,13 @@ const defaultFormat = winston.format.printf(
 		return `${timestamp} [${label}] ${level}: ${message}`;
 	}
 );
+
+const consoleFormat = winston.format.printf(({ level, message, label }) => {
+	if (level === 'prompt') {
+		return `${message}`;
+	}
+	return `[${level.substr(0, 1).toUpperCase()}:${label}] ${message}`;
+});
 
 class Logger implements ILogger {
 	_config: ILoggerConfig = {
@@ -33,8 +40,14 @@ class Logger implements ILogger {
 			),
 			transports: [
 				this._config.verbose
-					? new winston.transports.Console({ level: 'verbose' })
-					: new winston.transports.Console(),
+					? new winston.transports.Console({
+							level: 'verbose',
+							format: consoleFormat,
+					  })
+					: new winston.transports.Console({
+							level: 'prompt',
+							format: consoleFormat,
+					  }),
 				new winston.transports.File({
 					filename: 'combined.log',
 					dirname: outDir,
@@ -48,10 +61,14 @@ class Logger implements ILogger {
 	}
 
 	nested(message: string, args: any) {
-		this.consoleLog('data', message);
+		this.consoleLog('error', message);
 
 		Object.keys(args).forEach((key) => {
-			this.consoleLog('data', `>  ${key} ${args[key]}`);
+			if (typeof args[key] === 'object') {
+				this.nested(key, args[key]);
+			} else {
+				this.consoleLog('data', `>  ${key} ${args[key]}`);
+			}
 		});
 	}
 
@@ -102,30 +119,31 @@ class Logger implements ILogger {
 			'/===========================v======================================================\\',
 			`|     /////// ////// ////// | AC TOOLS - Extensions for VS-Code and NodeJS         |`,
 			`|    //   // //       //    | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |`,
-			`|   /////// //       //     | * ${appInfo.name.padEnd(38, ' ')} [${appInfo.version.padStart(9,' ')}] |`,
-			`|  //   // //       //      | ${appInfo.description.padEnd(52, "*")} |`,
-			`| //   // //////   //       | https://github.com/brodao/actools-extensions         |`,
+			`|   /////// //       //     |     https://github.com/brodao/actools-extensions     |`,
+			`|  //   // //       //      | ${appInfo.name.padEnd(
+				40,
+				' '
+			)} [${appInfo.version.padStart(9, ' ')}] |`,
+			`| //   // //////   //       | ${appInfo.description.padEnd(52, ' ')} |`,
 			'\\===========================^======================================================/',
 			``,
 		];
 	}
 
-	showBanner(appInfo: IAppInfo) {
+	showHeader(appInfo: IAppInfo) {
 		if (!this._config.showBanner) {
-			this.appText(appInfo).forEach((line: string) => this.log(line));
+			this.appText(appInfo).forEach((line: string) =>
+				this.consoleLog('prompt', line)
+			);
 		} else {
-			this.banner(appInfo).forEach((line: string) => this.log(line));
+			this.banner(appInfo).forEach((line: string) =>
+				this.consoleLog('prompt', line)
+			);
 		}
 	}
-
-	// logNewSection(title: string) {
-	// 	return title;
-	// }
 }
 
 const loggerMap: Map<string, ILogger> = new Map<string, ILogger>();
-
-export const actLogger: ILogger = getLogger('_act_');
 
 export function getLogger(id: string, config?: ILoggerConfig): ILogger {
 	return loggerMap.get(id) || createLogger(id, config);

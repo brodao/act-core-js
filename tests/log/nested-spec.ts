@@ -1,4 +1,4 @@
-import ACT from '../../lib/index';
+import { ACT } from '../../lib';
 
 const { wrap } = require('@brodao/act-jest-snapshot-console');
 

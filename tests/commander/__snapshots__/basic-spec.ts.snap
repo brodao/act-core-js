@@ -6,7 +6,7 @@ Object {
 
 Options:
   -V, --version  output the version number
-  -v, --verbose  detalha a execução (default: true)
+  -v, --verbose  detalha a execução (default: false)
   --no-banner    omite a abertura
   -h, --help     display help for command
 ",

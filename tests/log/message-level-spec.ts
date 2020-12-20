@@ -1,4 +1,4 @@
-import ACT from '../../lib/index';
+import { ACT } from '../../lib/index';
 
 const { wrap } = require('@brodao/act-jest-snapshot-console');
 
@@ -45,7 +45,7 @@ test('Verbose simples', () => {
 });
 
 test('Verbose com vários agumentos', () => {
-	ACT.logger._config.verboseEnable = true;
+	ACT.logger._config.verbose = true;
 
 	expect(
 		wrap(() =>
@@ -59,7 +59,7 @@ test('Verbose com vários agumentos', () => {
 });
 
 test('Verbose desligado', () => {
-	ACT.logger._config.verboseEnable = false;
+	ACT.logger._config.verbose = false;
 
 	expect(wrap(() => ACT.logger.verbose('Verbose desligado'))).toMatchSnapshot();
 });

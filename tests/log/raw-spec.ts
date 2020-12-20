@@ -1,4 +1,4 @@
-import ACT from '../../lib/index';
+import { ACT } from '../../lib/index';
 
 const { wrap } = require('@brodao/act-jest-snapshot-console');
 
@@ -6,10 +6,11 @@ describe('Console em texto puro', () => {
 	test("Apresenta o 'splash'", () => {
 		expect(
 			wrap(() =>
-				ACT.logger.showBanner({
+				ACT.logger.showHeader({
 					name: 'test_show_banner',
 					version: '99.99.99',
 					description: 'Show Banner',
+					url: 'http:://no.url',
 				})
 			)
 		).toMatchSnapshot();

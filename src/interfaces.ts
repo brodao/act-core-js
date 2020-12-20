@@ -4,6 +4,7 @@ export interface IAppInfo {
 	name: string;
 	version: string;
 	description: string;
+	url: string;
 }
 
 export interface ILoggerConfig {
@@ -17,19 +18,17 @@ export interface ILogger {
 	error: (...args: any) => void;
 	verbose: (...args: any) => void;
 	nested: (message: string, ...args: any) => void;
-	showBanner: (appInfo: IAppInfo) => void;
+	showHeader: (appInfo: IAppInfo) => void;
 	_config: ILoggerConfig;
 }
 
-export interface ICommander {
-	newCommand: (commandOptions: ICommandOptions) => Command.Command;
-	commandDidThrowAsync: (error: any, exitCode?: number) => void;
+export interface IAppCommander {
+	appCommand: () => Command.Command;
+	appLogger: () => ILogger;
 }
 
-export interface ICommandOptions {
-	name: string;
-	version: string;
-	default?: boolean;
+export interface IAppOptions {
+	appInfo: IAppInfo;
 	commandText?: boolean;
 	optionsText?: boolean;
 }
