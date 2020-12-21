@@ -2,18 +2,18 @@ import * as Command from 'commander';
 import { newAppCommand } from './appCommand';
 import { IAppCommander, IAppOptions, ILogger } from './interfaces';
 import { jsonFromFile, jsonToFile } from './jsonFile';
-import { getLogger } from './logger';
+import { createLogger, getLogger } from './logger';
 
 class AppCommander implements IAppCommander {
 	_command: Command.Command;
 	_logger: ILogger;
 
 	constructor(options: IAppOptions) {
+		let label: string = options.appInfo.shortName?.trim()
+			|| options.appInfo.name.split('/').reverse()[0];
+
 		this._command = newAppCommand(options);
-		this._logger = getLogger(options.appInfo.name, {
-			showBanner: true,
-			verbose: true,
-		});
+		this._logger = createLogger(options.appInfo.name, { label: label });
 	}
 
 	appCommand() {

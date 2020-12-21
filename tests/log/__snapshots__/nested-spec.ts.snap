@@ -3,6 +3,9 @@
 exports[`Mensagem aninhada 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
+E:[winston] Unknown logger level: %s
+E:[winston] Unknown logger level: %s
+",
 }
 `;

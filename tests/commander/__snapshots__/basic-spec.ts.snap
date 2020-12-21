@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Mensagem aninhada 1`] = `
+exports[`Comando HELP 1`] = `
 Object {
-  Symbol(act-jest-snapshot-raw): "Usage: app_commander_test [command] [options]
+  Symbol(act-jest-snapshot-raw): "Usage: app_commander_test <command> [options]
 
 Options:
   -V, --version  output the version number

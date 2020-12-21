@@ -1,9 +1,11 @@
 import * as winston from 'winston';
 import * as os from 'os';
-import { IAppInfo, ILogger, ILoggerConfig } from './interfaces';
+import * as path from 'path';
+import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from './interfaces';
 
-const outDir: string = os.homedir(); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
-const defaultFormat = winston.format.printf(
+const outDir: string = path.join(os.homedir(), ".act-nodejs"); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
+
+const fileTextFormat = winston.format.printf(
 	({ level, message, label, timestamp }) => {
 		return `${timestamp} [${label}] ${level}: ${message}`;
 	}
@@ -17,62 +19,99 @@ const consoleFormat = winston.format.printf(({ level, message, label }) => {
 });
 
 class Logger implements ILogger {
-	_config: ILoggerConfig = {
+	private _config: ILoggerConfig = {
+		label: undefined,
 		verbose: false,
 		showBanner: true,
+		writeTextFile: true,
+		writeJsonFile: false,
 	};
 
-	_id: string;
-	_logger: winston.Logger;
+	private _logger: winston.Logger;
 
-	constructor(id: string, config?: ILoggerConfig) {
-		if (config) {
-			this._config = config;
-		}
+	shouldIgnore = winston.format((info) => {
+		// if (info.level == "verbose" && !this._config.verbose) {
+		// 	return false;
+		// }
+
+		return info;
+	});
+
+	private _textFile: winston.transports.FileTransportInstance;
+	private _jsonFile: winston.transports.FileTransportInstance;
+
+	constructor(id: string, config: ILoggerConfig) {
+		id = id.trim();
 
 		const options: winston.LoggerOptions = {
-			levels: winston.config.cli.levels,
-			//level: 'info',
+			exitOnError: false,
+			//level: "verbose",
+			levels: winston.config.npm.levels,
 			format: winston.format.combine(
-				winston.format.label({ label: id }),
+				this.shouldIgnore(),
+				winston.format.label({ label: config.label ? config.label : id }),
 				winston.format.timestamp(),
-				defaultFormat
+				consoleFormat
 			),
 			transports: [
-				this._config.verbose
-					? new winston.transports.Console({
-							level: 'verbose',
-							format: consoleFormat,
-					  })
-					: new winston.transports.Console({
-							level: 'prompt',
-							format: consoleFormat,
-					  }),
-				new winston.transports.File({
-					filename: 'combined.log',
-					dirname: outDir,
-				}),
+				new winston.transports.Console()
 			],
 		};
 
-		this._id = id;
-		//this._logger = actLogger?(actLogger as Logger)._logger.child({ requestId: id }):winston.createLogger(options);
+		this._textFile = new winston.transports.File({
+			filename: id + '.log',
+			dirname: outDir,
+			format: fileTextFormat
+		});
+
+		this._jsonFile = new winston.transports.File({
+			filename: id + '.json',
+			dirname: outDir,
+			format: winston.format.json()
+		});
+
 		this._logger = winston.createLogger(options);
+
+		this.reconfig(config);
 	}
 
-	nested(message: string, args: any) {
-		this.consoleLog('error', message);
+	public config(): ILoggerConfig {
+		return this._config;
+	}
+
+	public reconfig(newConfig: ILoggerConfig) {
+		this._config = { ...this._config, ...newConfig };
+
+		if (this._config.writeTextFile) {
+			this._logger.add(this._textFile);
+		} else {
+			this._logger.remove(this._textFile);
+		}
+
+		if (this._config.writeJsonFile) {
+			this._logger.add(this._jsonFile);
+		} else {
+			this._logger.remove(this._jsonFile);
+		}
+
+		// const opt: winston.LoggerOptions = {
+		// };
+		// this._logger.configure(opt)
+	}
+
+	nested(level: LogLevel, message: string, args: any) {
+		this.consoleLog(level, message);
 
 		Object.keys(args).forEach((key) => {
 			if (typeof args[key] === 'object') {
-				this.nested(key, args[key]);
+				this.nested("data", key, args[key]);
 			} else {
 				this.consoleLog('data', `>  ${key} ${args[key]}`);
 			}
 		});
 	}
 
-	private consoleLog(level: string, message: string, data: any[] = []) {
+	private consoleLog(level: LogLevel, message: string, data: any[] = []) {
 		let msg: string = message;
 
 		data.forEach((element: any, index: number) => {
@@ -91,25 +130,25 @@ class Logger implements ILogger {
 	}
 
 	log(...args: any[]) {
-		this.consoleLog('info', args[0], args.slice(1));
+		this.consoleLog('log', args[0], args.slice(1));
+	}
+
+	prompt(question: string, anwser: any) {
+		this.nested('prompt', question, anwser);
 	}
 
 	verbose(...args: any[]) {
-		if (this._logger.isVerboseEnabled()) {
-			const text = args[0];
+		console.log(`>>>>>>>>>>>>> ${this._logger.isVerboseEnabled()}`);
 
-			if (args.length > 1) {
-				this.nested(text, args.slice(1));
-			} else {
-				this._logger.verbose(text);
-			}
+		if (this._logger.isVerboseEnabled()) {
+			const text: string = args[0] as string;
+			this.nested("verbose", text, args.slice(1));
 		}
 	}
 
 	appText(appInfo: IAppInfo): string[] {
 		return [
 			`${'AC TOOLS'} - Extensions for VS-Code and NodeJS`,
-			'See https://github.com/brodao/actools-extensions',
 			`${appInfo.name} [${appInfo.version}] ${appInfo.description}`,
 		];
 	}
@@ -133,23 +172,28 @@ class Logger implements ILogger {
 	showHeader(appInfo: IAppInfo) {
 		if (!this._config.showBanner) {
 			this.appText(appInfo).forEach((line: string) =>
-				this.consoleLog('prompt', line)
+				this.log(line)
 			);
 		} else {
 			this.banner(appInfo).forEach((line: string) =>
-				this.consoleLog('prompt', line)
+				this.log(line)
 			);
 		}
 	}
 }
 
 const loggerMap: Map<string, ILogger> = new Map<string, ILogger>();
+const actLogger: ILogger = createLogger('_act_', {
+	label: '_act_',
+	verbose: true,
+	showBanner: true,
+});
 
-export function getLogger(id: string, config?: ILoggerConfig): ILogger {
-	return loggerMap.get(id) || createLogger(id, config);
+export function getLogger(id: string): ILogger {
+	return loggerMap.get(id) || actLogger;
 }
 
-function createLogger(id: string, config?: ILoggerConfig): ILogger {
+export function createLogger(id: string, config: ILoggerConfig): ILogger {
 	const newLogger: ILogger = new Logger(id, config);
 	loggerMap.set(id, newLogger);
 

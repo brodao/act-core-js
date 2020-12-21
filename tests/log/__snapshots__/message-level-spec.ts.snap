@@ -31,41 +31,47 @@ Object {
 exports[`Informação com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
+",
 }
 `;
 
 exports[`Informação simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
+",
 }
 `;
 
 exports[`Log com argumentos {} 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
+",
 }
 `;
 
 exports[`Verbose com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "L:>>>>>>>>>>>>> false
+",
 }
 `;
 
 exports[`Verbose desligado 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "L:>>>>>>>>>>>>> false
+",
 }
 `;
 
 exports[`Verbose simples 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
+  Symbol(act-jest-snapshot-console): "L:>>>>>>>>>>>>> false
+",
 }
 `;

@@ -5,21 +5,29 @@ export interface IAppInfo {
 	version: string;
 	description: string;
 	url: string;
+	shortName?: string;
 }
 
 export interface ILoggerConfig {
-	verbose: boolean;
-	showBanner: boolean;
+	label?: string;
+	verbose?: boolean;
+	showBanner?: boolean;
+	writeTextFile?: boolean;
+	writeJsonFile?: boolean;
 }
+
+export type LogLevel = "log" | "warn" | "error" | "verbose" | "data" | "prompt";
 
 export interface ILogger {
 	log: (...args: any) => void;
 	warn: (...args: any) => void;
 	error: (...args: any) => void;
 	verbose: (...args: any) => void;
-	nested: (message: string, ...args: any) => void;
+	nested: (level: LogLevel, message: string, ...args: any) => void;
+	prompt: (question: string, anwser: any) => void;
 	showHeader: (appInfo: IAppInfo) => void;
-	_config: ILoggerConfig;
+	config: () => ILoggerConfig;
+	reconfig: (newConfig: ILoggerConfig) => void;
 }
 
 export interface IAppCommander {

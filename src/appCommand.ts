@@ -5,7 +5,7 @@ export function newAppCommand(options: IAppOptions): Command.Command {
 	const program: Command.Command = new Command.Command(options.appInfo.name)
 		.version(options.appInfo.version)
 		.usage(
-			(options.commandText ? '[command]' : '') +
+			(options.commandText ? '<command>' : '') +
 				(options.commandText && options.optionsText ? ' ' : '') +
 				(options.optionsText ? '[options]' : '')
 		);
