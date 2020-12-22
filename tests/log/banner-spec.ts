@@ -13,13 +13,13 @@ const appInfo: IAppInfo = {
 
 describe("Testa a apresentação ou não do 'splash' completo", () => {
 	test("Apresenta o 'splash'", () => {
-		ACT.logger.reconfig({showBanner: true});
+		ACT.logger.reconfig({ showBanner: true });
 
 		expect(wrap(() => ACT.logger.showHeader(appInfo))).toMatchSnapshot();
 	});
 
 	test("Apresenta um 'splash' simples de identificação", () => {
-		ACT.logger.reconfig({showBanner: false});
+		ACT.logger.reconfig({ showBanner: false });
 
 		expect(wrap(() => ACT.logger.showHeader(appInfo))).toMatchSnapshot();
 	});

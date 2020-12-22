@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-const stripJsonComments = require('strip-json-comments');
+import stripJsonComments from 'strip-json-comments';
 
 export function jsonFromFile(file: string): JSON {
 	let content: any = {};

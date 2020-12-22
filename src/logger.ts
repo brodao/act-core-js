@@ -3,7 +3,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from './interfaces';
 
-const outDir: string = path.join(os.homedir(), ".act-nodejs"); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
+const outDir: string = path.join(os.homedir(), '.act-nodejs'); // process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE || "./";
 
 const fileTextFormat = winston.format.printf(
 	({ level, message, label, timestamp }) => {
@@ -23,8 +23,8 @@ class Logger implements ILogger {
 		label: undefined,
 		verbose: false,
 		showBanner: true,
-		writeTextFile: true,
-		writeJsonFile: false,
+		logToFile: true,
+		logFormat: 'text',
 	};
 
 	private _logger: winston.Logger;
@@ -45,30 +45,33 @@ class Logger implements ILogger {
 
 		const options: winston.LoggerOptions = {
 			exitOnError: false,
-			//level: "verbose",
+			level: "info",
 			levels: winston.config.npm.levels,
 			format: winston.format.combine(
+				winston.format.colorize({ all: true }),
 				this.shouldIgnore(),
 				winston.format.label({ label: config.label ? config.label : id }),
 				winston.format.timestamp(),
 				consoleFormat
 			),
-			transports: [
-				new winston.transports.Console()
-			],
+			transports: [new winston.transports.Console({ handleExceptions: true })],
 		};
 
 		this._textFile = new winston.transports.File({
+			level: "verbose",
 			filename: id + '.log',
 			dirname: outDir,
-			format: fileTextFormat
+			format: fileTextFormat,
+			handleExceptions: true,
 		});
 
 		this._jsonFile = new winston.transports.File({
-			filename: id + '.json',
+			level: "verbose",
+			filename: id + '.log.json',
 			dirname: outDir,
-			format: winston.format.json()
-		});
+			format: winston.format.json(),
+			handleExceptions: true,
+ 		});
 
 		this._logger = winston.createLogger(options);
 
@@ -82,21 +85,17 @@ class Logger implements ILogger {
 	public reconfig(newConfig: ILoggerConfig) {
 		this._config = { ...this._config, ...newConfig };
 
-		if (this._config.writeTextFile) {
-			this._logger.add(this._textFile);
+		if (this._config.logToFile) {
+			this._logger.add(
+				this._config.logFormat === 'text' ? this._textFile : this._jsonFile
+			);
 		} else {
 			this._logger.remove(this._textFile);
-		}
-
-		if (this._config.writeJsonFile) {
-			this._logger.add(this._jsonFile);
-		} else {
 			this._logger.remove(this._jsonFile);
 		}
+???
+		process.env.VERBOSE
 
-		// const opt: winston.LoggerOptions = {
-		// };
-		// this._logger.configure(opt)
 	}
 
 	nested(level: LogLevel, message: string, args: any) {
@@ -104,7 +103,7 @@ class Logger implements ILogger {
 
 		Object.keys(args).forEach((key) => {
 			if (typeof args[key] === 'object') {
-				this.nested("data", key, args[key]);
+				this.nested('data', key, args[key]);
 			} else {
 				this.consoleLog('data', `>  ${key} ${args[key]}`);
 			}
@@ -130,7 +129,7 @@ class Logger implements ILogger {
 	}
 
 	log(...args: any[]) {
-		this.consoleLog('log', args[0], args.slice(1));
+		this.consoleLog('info', args[0], args.slice(1));
 	}
 
 	prompt(question: string, anwser: any) {
@@ -138,11 +137,9 @@ class Logger implements ILogger {
 	}
 
 	verbose(...args: any[]) {
-		console.log(`>>>>>>>>>>>>> ${this._logger.isVerboseEnabled()}`);
-
 		if (this._logger.isVerboseEnabled()) {
 			const text: string = args[0] as string;
-			this.nested("verbose", text, args.slice(1));
+			this.nested('verbose', text, args.slice(1));
 		}
 	}
 
@@ -171,13 +168,9 @@ class Logger implements ILogger {
 
 	showHeader(appInfo: IAppInfo) {
 		if (!this._config.showBanner) {
-			this.appText(appInfo).forEach((line: string) =>
-				this.log(line)
-			);
+			this.appText(appInfo).forEach((line: string) => this.log(line));
 		} else {
-			this.banner(appInfo).forEach((line: string) =>
-				this.log(line)
-			);
+			this.banner(appInfo).forEach((line: string) => this.log(line));
 		}
 	}
 }

@@ -25,6 +25,7 @@
 		"clean": "rimraf lib && rimraf coverage",
 		"format": "prettier --write \"{src,tests}/**/*.ts\" --single-quote --trailing-comma es5",
 		"lint": "tslint --force --format verbose \"src/**/*.ts\"",
+		"lint:fix": "tslint --fix \"src/**/*.ts\"",
 		"prebuild": "npm run clean && echo Using TypeScript && tsc --version",
 		"build": "tsc -p .",
 		"watch": "npm run build -- --watch",

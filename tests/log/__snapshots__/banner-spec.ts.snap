@@ -3,23 +3,13 @@
 exports[`Testa a apresentação ou não do 'splash' completo Apresenta o 'splash' 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-",
+  Symbol(act-jest-snapshot-console): "",
 }
 `;
 
 exports[`Testa a apresentação ou não do 'splash' completo Apresenta um 'splash' simples de identificação 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "E:[winston] Unknown logger level: %s
-E:[winston] Unknown logger level: %s
-",
+  Symbol(act-jest-snapshot-console): "",
 }
 `;

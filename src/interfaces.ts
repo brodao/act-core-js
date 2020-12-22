@@ -12,11 +12,17 @@ export interface ILoggerConfig {
 	label?: string;
 	verbose?: boolean;
 	showBanner?: boolean;
-	writeTextFile?: boolean;
-	writeJsonFile?: boolean;
+	logToFile?: boolean;
+	logFormat?: string;
 }
 
-export type LogLevel = "log" | "warn" | "error" | "verbose" | "data" | "prompt";
+export type LogLevel =
+	| 'info'
+	| 'warn'
+	| 'error'
+	| 'verbose'
+	| 'data'
+	| 'prompt';
 
 export interface ILogger {
 	log: (...args: any) => void;

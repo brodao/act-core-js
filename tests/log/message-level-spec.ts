@@ -39,13 +39,13 @@ test('Erro com vários agumentos', () => {
 });
 
 test('Verbose simples', () => {
-	ACT.logger.reconfig({verbose: true});
+	ACT.logger.reconfig({ verbose: true });
 
 	expect(wrap(() => ACT.logger.verbose('Verbose simples'))).toMatchSnapshot();
 });
 
 test('Verbose com vários agumentos', () => {
-	ACT.logger.reconfig({verbose: true});
+	ACT.logger.reconfig({ verbose: true });
 
 	expect(
 		wrap(() =>
@@ -59,7 +59,7 @@ test('Verbose com vários agumentos', () => {
 });
 
 test('Verbose desligado', () => {
-	ACT.logger.reconfig({verbose: false});
+	ACT.logger.reconfig({ verbose: false });
 
 	expect(wrap(() => ACT.logger.verbose('Verbose desligado'))).toMatchSnapshot();
 });

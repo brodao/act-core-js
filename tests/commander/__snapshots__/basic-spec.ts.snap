@@ -5,10 +5,12 @@ Object {
   Symbol(act-jest-snapshot-raw): "Usage: app_commander_test <command> [options]
 
 Options:
-  -V, --version  output the version number
-  -v, --verbose  detalha a execução (default: false)
-  --no-banner    omite a abertura
-  -h, --help     display help for command
+  -v, --version             output the version number
+  --verbose                 detalha a execução (default: false)
+  --no-banner               omite a abertura
+  --log-to-file             gera arquivo com as ocorrências
+  --log-format <json|text>  formato do arquivo de logo (default: \\"text\\")
+  -h, --help                display help for command
 ",
   Symbol(act-jest-snapshot-console): "",
 }
