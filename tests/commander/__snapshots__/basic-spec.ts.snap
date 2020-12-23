@@ -8,7 +8,7 @@ Options:
   -v, --version             output the version number
   --verbose                 detalha a execução (default: false)
   --no-banner               omite a abertura
-  --log-to-file             gera arquivo com as ocorrências
+  --log-to-file             gera arquivo com as ocorrências (default: false)
   --log-format <json|text>  formato do arquivo de logo (default: \\"text\\")
   -h, --help                display help for command
 ",

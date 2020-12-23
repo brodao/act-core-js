@@ -1,15 +1,15 @@
-import * as Command from 'commander';
+import * as Command from "commander";
 
 export interface IAppInfo {
 	name: string;
 	version: string;
 	description: string;
 	url: string;
-	shortName?: string;
+	getShortName: () => string;
 }
 
 export interface ILoggerConfig {
-	label?: string;
+	appInfo?: IAppInfo;
 	verbose?: boolean;
 	showBanner?: boolean;
 	logToFile?: boolean;
@@ -17,23 +17,31 @@ export interface ILoggerConfig {
 }
 
 export type LogLevel =
-	| 'info'
-	| 'warn'
-	| 'error'
-	| 'verbose'
-	| 'data'
-	| 'prompt';
+	| "error"
+	| "warn"
+	| "help"
+	| "data"
+	| "info"
+	| "debug"
+	| "prompt"
+	| "verbose"
+	| "input";
 
 export interface ILogger {
-	log: (...args: any) => void;
-	warn: (...args: any) => void;
 	error: (...args: any) => void;
-	verbose: (...args: any) => void;
-	nested: (level: LogLevel, message: string, ...args: any) => void;
+	warn: (...args: any) => void;
+	help: (...args: any) => void;
+	data: (...args: any) => void;
+	info: (...args: any) => void;
+	debug: (...args: any) => void;
 	prompt: (question: string, anwser: any) => void;
-	showHeader: (appInfo: IAppInfo) => void;
-	config: () => ILoggerConfig;
-	reconfig: (newConfig: ILoggerConfig) => void;
+	verbose: (...args: any) => void;
+	input: (...args: any) => void;
+	nested: (level: LogLevel, message: string, ...args: any) => void;
+	showHeader: () => void;
+	profile: (id: string) => void;
+	getConfig: () => ILoggerConfig;
+	setConfig: (newConfig: ILoggerConfig) => void;
 }
 
 export interface IAppCommander {
