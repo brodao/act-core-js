@@ -1,14 +1,14 @@
-import { ACT } from "../../lib";
-import { IAppInfo } from "../../lib/interfaces";
+import { ACT } from '../../lib';
+import { IAppInfo } from '../../lib/interfaces';
 
-const { wrap } = require("@brodao/act-jest-snapshot-console");
+const { wrap } = require('@brodao/act-jest-snapshot-console');
 
 const appInfo: IAppInfo = {
-	shortName: "test",
-	name: "test_show_banner",
-	version: "99.99.99",
-	description: "Show Banner or single line",
-	url: "http://no.url",
+	shortName: 'test',
+	name: 'test_show_banner',
+	version: '99.99.99',
+	description: 'Show Banner or single line',
+	url: 'http://no.url',
 };
 
 describe("Testa a apresentação ou não do 'splash' completo", () => {

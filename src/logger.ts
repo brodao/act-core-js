@@ -1,9 +1,9 @@
-import * as winston from "winston";
-import * as os from "os";
-import * as path from "path";
-import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from "./interfaces";
+import * as winston from 'winston';
+import * as os from 'os';
+import * as path from 'path';
+import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from './interfaces';
 
-const outDir: string = path.join(os.homedir(), ".act-nodejs");
+const outDir: string = path.join(os.homedir(), '.act-nodejs');
 
 const fileTextFormat = winston.format.printf(
 	({ level, message, label, timestamp }) => {
@@ -21,7 +21,7 @@ class Logger implements ILogger {
 		verbose: false,
 		showBanner: true,
 		logToFile: false,
-		logFormat: "text",
+		logFormat: 'text',
 	};
 
 	private _id: string;
@@ -41,7 +41,7 @@ class Logger implements ILogger {
 
 	setConfig(newConfig: ILoggerConfig) {
 		this._config = { ...this._config, ...newConfig };
-		const level: string = this._config.verbose ? "verbose" : "info";
+		const level: string = this._config.verbose ? 'verbose' : 'info';
 
 		const options: winston.LoggerOptions = {
 			exitOnError: false,
@@ -65,14 +65,14 @@ class Logger implements ILogger {
 
 			this._textFile = new winston.transports.File({
 				level: level,
-				filename: this._id + ".log",
+				filename: this._id + '.log',
 				dirname: outDir,
 				format: fileTextFormat,
 			});
 
 			this._jsonFile = new winston.transports.File({
 				level: level,
-				filename: this._id + ".log.json",
+				filename: this._id + '.log.json',
 				dirname: outDir,
 				format: winston.format.json(),
 			});
@@ -80,7 +80,7 @@ class Logger implements ILogger {
 
 		if (this._config.logToFile) {
 			this._logger.add(
-				this._config.logFormat === "text" ? this._textFile : this._jsonFile
+				this._config.logFormat === 'text' ? this._textFile : this._jsonFile
 			);
 		} else {
 			this._logger.remove(this._textFile);
@@ -92,10 +92,10 @@ class Logger implements ILogger {
 		this.consoleLog(level, message);
 
 		Object.keys(args).forEach((key) => {
-			if (typeof args[key] === "object") {
-				this.nested("data", key, args[key]);
+			if (typeof args[key] === 'object') {
+				this.nested('data', key, args[key]);
 			} else {
-				this.consoleLog("data", ">  %s = %s", key, args[key]);
+				this.consoleLog('data', '>  %s = %s', key, args[key]);
 			}
 		});
 	}
@@ -105,41 +105,41 @@ class Logger implements ILogger {
 	}
 
 	help(...args: any) {
-		this.consoleLog("help", args[0], args.slice(1));
+		this.consoleLog('help', args[0], args.slice(1));
 	}
 
 	data(...args: any) {
-		this.consoleLog("data", args[0], args.slice(1));
+		this.consoleLog('data', args[0], args.slice(1));
 	}
 
 	debug(...args: any) {
-		this.consoleLog("debug", args[0], args.slice(1));
+		this.consoleLog('debug', args[0], args.slice(1));
 	}
 
 	input(...args: any) {
-		this.consoleLog("input", args[0], args.slice(1));
+		this.consoleLog('input', args[0], args.slice(1));
 	}
 
 	error(...args: any[]) {
-		this.consoleLog("error", args[0], args.slice(1));
+		this.consoleLog('error', args[0], args.slice(1));
 	}
 
 	warn(...args: any[]) {
-		this.consoleLog("warn", args[0], args.slice(1));
+		this.consoleLog('warn', args[0], args.slice(1));
 	}
 
 	info(...args: any[]) {
-		this.consoleLog("info", args[0], args.slice(1));
+		this.consoleLog('info', args[0], args.slice(1));
 	}
 
 	prompt(question: string, anwser: any) {
-		this.nested("prompt", question, anwser);
+		this.nested('prompt', question, anwser);
 	}
 
 	verbose(...args: any[]) {
 		if (this._logger.isVerboseEnabled()) {
 			const text: string = args[0] as string;
-			this.nested("verbose", text, args.slice(1));
+			this.nested('verbose', text, args.slice(1));
 		}
 	}
 
@@ -149,24 +149,24 @@ class Logger implements ILogger {
 
 	private appText(appInfo: IAppInfo): string[] {
 		return [
-			"AC TOOLS - Extensions for VS-Code and NodeJS",
+			'AC TOOLS - Extensions for VS-Code and NodeJS',
 			`${appInfo.name} [${appInfo.version}] ${appInfo.description}`,
 		];
 	}
 
 	private banner(appInfo: IAppInfo): string[] {
 		return [
-			"/===========================v======================================================\\",
-			"|     /////// ////// ////// | AC TOOLS - Extensions for VS-Code and NodeJS         |",
-			"|    //   // //       //    | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |",
-			"|   /////// //       //     |     https://github.com/brodao/actools-extensions     |",
+			'/===========================v======================================================\\',
+			'|     /////// ////// ////// | AC TOOLS - Extensions for VS-Code and NodeJS         |',
+			'|    //   // //       //    | (C) 2020 Alan Candido (BRODAO) <brodao@gmail.com>    |',
+			'|   /////// //       //     |     https://github.com/brodao/actools-extensions     |',
 			`|  //   // //       //      | ${appInfo.name.padEnd(
 				40,
-				" "
-			)} [${appInfo.version.padStart(9, " ")}] |`,
-			`| //   // //////   //       | ${appInfo.description.padEnd(52, " ")} |`,
-			"\\===========================^======================================================/",
-			"",
+				' '
+			)} [${appInfo.version.padStart(9, ' ')}] |`,
+			`| //   // //////   //       | ${appInfo.description.padEnd(52, ' ')} |`,
+			'\\===========================^======================================================/',
+			'',
 		];
 	}
 
@@ -186,14 +186,14 @@ class Logger implements ILogger {
 }
 
 const loggerMap: Map<string, ILogger> = new Map<string, ILogger>();
-const actLogger: ILogger = createLogger("_act_", {
+const actLogger: ILogger = createLogger('_act_', {
 	appInfo: {
-		name: "AC Tools",
-		version: "",
-		description: "",
-		url: "",
+		name: 'AC Tools',
+		version: '',
+		description: '',
+		url: '',
 		getShortName: () => {
-			return "actools-js";
+			return 'actools-js';
 		},
 	},
 	verbose: true,
