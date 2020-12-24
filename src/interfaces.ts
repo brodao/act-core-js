@@ -5,6 +5,7 @@ export interface IAppInfo {
 	version: string;
 	description: string;
 	url: string;
+	displayName: string;
 	getShortName: () => string;
 }
 
@@ -38,7 +39,6 @@ export interface ILogger {
 	verbose: (...args: any) => void;
 	input: (...args: any) => void;
 	nested: (level: LogLevel, message: string, ...args: any) => void;
-	showHeader: () => void;
 	profile: (id: string) => void;
 	getConfig: () => ILoggerConfig;
 	setConfig: (newConfig: ILoggerConfig) => void;

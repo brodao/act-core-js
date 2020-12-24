@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Console em texto puro Apresenta o 'splash' 1`] = `
-Object {
-  Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
-}
-`;
-
 exports[`Console em texto puro Aviso com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
@@ -15,13 +8,6 @@ Object {
 `;
 
 exports[`Console em texto puro Aviso simples 1`] = `
-Object {
-  Symbol(act-jest-snapshot-raw): undefined,
-  Symbol(act-jest-snapshot-console): "",
-}
-`;
-
-exports[`Console em texto puro Erro com vários agumentos 1`] = `
 Object {
   Symbol(act-jest-snapshot-raw): undefined,
   Symbol(act-jest-snapshot-console): "",

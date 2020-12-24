@@ -2,16 +2,7 @@
 
 exports[`Comando HELP 1`] = `
 Object {
-  Symbol(act-jest-snapshot-raw): "Usage: app_commander_test <command> [options]
-
-Options:
-  -v, --version             output the version number
-  --verbose                 detalha a execução (default: false)
-  --no-banner               omite a abertura
-  --log-to-file             gera arquivo com as ocorrências (default: false)
-  --log-format <json|text>  formato do arquivo de logo (default: \\"text\\")
-  -h, --help                display help for command
-",
+  Symbol(act-jest-snapshot-raw): "<<< VERIFICAR LOOP >>>",
   Symbol(act-jest-snapshot-console): "",
 }
 `;
