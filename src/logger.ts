@@ -18,7 +18,7 @@ const consoleFormat = winston.format.printf(({ message }) => {
 class Logger implements ILogger {
 	private _config: ILoggerConfig = {
 		appInfo: undefined,
-		verbose: false,
+		verbose: "info",
 		showBanner: true,
 		logToFile: false,
 		logFormat: "text",
@@ -42,7 +42,7 @@ class Logger implements ILogger {
 
 	setConfig(newConfig: ILoggerConfig) {
 		this._config = { ...this._config, ...newConfig };
-		const level: string = this._config.verbose ? "verbose" : "info";
+		const level: string = this._config.verbose ? "debug" : "info";
 
 		const options: winston.LoggerOptions = {
 			exitOnError: false,
@@ -50,8 +50,8 @@ class Logger implements ILogger {
 			level: level,
 			levels: winston.config.cli.levels,
 			format: winston.format.combine(
-				winston.format.colorize({ all: true }),
 				winston.format.splat(),
+				winston.format.colorize({ all: true }),
 				winston.format.label({ label: this._config.appInfo?.getShortName() }),
 				winston.format.timestamp(),
 				consoleFormat
@@ -93,15 +93,16 @@ class Logger implements ILogger {
 		this.consoleLog(level, message);
 
 		Object.keys(args).forEach((key) => {
-			if (Array.isArray(args[key])) {
-				for (let index = 0; index < args[key].length; index++) {
-					const element = args[key][index];
-					this.nested("data", "> %d = %s", index, element);
+			const item: any = args[key];
+
+			if (Array.isArray(item)) {
+				for (let index = 0; index < item.length; index++) {
+					this.consoleLog("data", "> %s", item[index]);
 				}
 			} else if (typeof args[key] === "object") {
-				//				this.nested("data", key, args[key]);
+				this.nested("data", key, args[key]);
 			} else {
-				//				this.consoleLog("data", ">  %s = %s", key, args[key]);
+				this.consoleLog("data", ">  %s = %s", key, args[key]);
 			}
 		});
 	}
@@ -111,7 +112,8 @@ class Logger implements ILogger {
 			this._firstLog = false;
 			this.showHeader();
 		}
-		this._logger.log(level, message, data);
+
+		this._logger.log(level, message, ...data);
 	}
 
 	help(...args: any) {
@@ -225,7 +227,7 @@ const actLogger: ILogger = createLogger("_act_", {
 			return "actools-js";
 		},
 	},
-	verbose: true,
+	verbose: "verbose",
 	showBanner: true,
 });
 

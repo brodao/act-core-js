@@ -3,10 +3,6 @@
 	"compilerOptions": {
 		"outDir": "lib",
 		"rootDir": "src",
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true
 	},
 	"include": ["src/**/*"],
 }

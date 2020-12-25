@@ -1,4 +1,4 @@
-import * as Command from 'commander';
+import * as Command from "commander";
 
 export interface IAppInfo {
 	name: string;
@@ -11,22 +11,22 @@ export interface IAppInfo {
 
 export interface ILoggerConfig {
 	appInfo?: IAppInfo;
-	verbose?: boolean;
+	verbose?: string;
 	showBanner?: boolean;
 	logToFile?: boolean;
 	logFormat?: string;
 }
 
 export type LogLevel =
-	| 'error'
-	| 'warn'
-	| 'help'
-	| 'data'
-	| 'info'
-	| 'debug'
-	| 'prompt'
-	| 'verbose'
-	| 'input';
+	| "error"
+	| "warn"
+	| "help"
+	| "data"
+	| "info"
+	| "debug"
+	| "prompt"
+	| "verbose"
+	| "input";
 
 export interface ILogger {
 	error: (...args: any) => void;
@@ -44,15 +44,22 @@ export interface ILogger {
 	setConfig: (newConfig: ILoggerConfig) => void;
 }
 
+//opts(): { [key: string]: any };
+export interface IAppConfig {
+	keys: () => string[];
+	get: (key: string, defaultValue?: string) => string;
+	set: (key: string, value: string) => void;
+	delete: (key: string) => void;
+}
+
 export interface IAppCommander {
 	appCommand: () => Command.Command;
 	appLogger: () => ILogger;
+	appConfig: () => IAppConfig;
 }
 
 export interface IAppOptions {
 	appInfo: IAppInfo;
-	commandText?: boolean;
-	optionsText?: boolean;
 }
 
 export interface IJsonFile {
