@@ -1,9 +1,9 @@
-import * as winston from "winston";
-import * as os from "os";
-import * as path from "path";
-import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from "./interfaces";
+import * as winston from 'winston';
+import * as os from 'os';
+import * as path from 'path';
+import { IAppInfo, ILogger, ILoggerConfig, LogLevel } from './interfaces';
 
-const outDir: string = path.join(os.homedir(), ".act-nodejs");
+const outDir: string = path.join(os.homedir(), '.act-nodejs');
 
 const fileTextFormat = winston.format.printf(
 	({ level, message, label, timestamp }) => {
@@ -18,10 +18,10 @@ const consoleFormat = winston.format.printf(({ message }) => {
 class Logger implements ILogger {
 	private _config: ILoggerConfig = {
 		appInfo: undefined,
-		verbose: "info",
+		verbose: 'info',
 		showBanner: true,
 		logToFile: false,
-		logFormat: "text",
+		logFormat: 'text',
 	};
 
 	private _id: string;
@@ -42,7 +42,7 @@ class Logger implements ILogger {
 
 	setConfig(newConfig: ILoggerConfig) {
 		this._config = { ...this._config, ...newConfig };
-		const level: string = this._config.verbose ? "debug" : "info";
+		const level: string = 'verbose'; //this._config.verbose ? "debug" : "info";
 
 		const options: winston.LoggerOptions = {
 			exitOnError: false,
@@ -66,14 +66,14 @@ class Logger implements ILogger {
 
 			this._textFile = new winston.transports.File({
 				level: level,
-				filename: this._id + ".log",
+				filename: this._id + '.log',
 				dirname: outDir,
 				format: fileTextFormat,
 			});
 
 			this._jsonFile = new winston.transports.File({
 				level: level,
-				filename: this._id + ".log.json",
+				filename: this._id + '.log.json',
 				dirname: outDir,
 				format: winston.format.json(),
 			});
@@ -81,7 +81,7 @@ class Logger implements ILogger {
 
 		if (this._config.logToFile) {
 			this._logger.add(
-				this._config.logFormat === "text" ? this._textFile : this._jsonFile
+				this._config.logFormat === 'text' ? this._textFile : this._jsonFile
 			);
 		} else {
 			this._logger.remove(this._textFile);
@@ -97,12 +97,12 @@ class Logger implements ILogger {
 
 			if (Array.isArray(item)) {
 				for (let index = 0; index < item.length; index++) {
-					this.consoleLog("data", "> %s", item[index]);
+					this.consoleLog('data', '> %s', item[index]);
 				}
-			} else if (typeof args[key] === "object") {
-				this.nested("data", key, args[key]);
+			} else if (typeof args[key] === 'object') {
+				this.nested('data', key, args[key]);
 			} else {
-				this.consoleLog("data", ">  %s = %s", key, args[key]);
+				this.consoleLog('data', '>  %s = %s', key, args[key]);
 			}
 		});
 	}
@@ -117,41 +117,41 @@ class Logger implements ILogger {
 	}
 
 	help(...args: any) {
-		this.consoleLog("help", args[0], args.slice(1));
+		this.consoleLog('help', args[0], args.slice(1));
 	}
 
 	data(...args: any) {
-		this.consoleLog("data", args[0], args.slice(1));
+		this.consoleLog('data', args[0], args.slice(1));
 	}
 
 	debug(...args: any) {
-		this.consoleLog("debug", args[0], args.slice(1));
+		this.consoleLog('debug', args[0], args.slice(1));
 	}
 
 	input(...args: any) {
-		this.consoleLog("input", args[0], args.slice(1));
+		this.consoleLog('input', args[0], args.slice(1));
 	}
 
 	error(...args: any[]) {
-		this.consoleLog("error", args[0], args.slice(1));
+		this.consoleLog('error', args[0], args.slice(1));
 	}
 
 	warn(...args: any[]) {
-		this.consoleLog("warn", args[0], args.slice(1));
+		this.consoleLog('warn', args[0], args.slice(1));
 	}
 
 	info(...args: any[]) {
-		this.consoleLog("info", args[0], args.slice(1));
+		this.consoleLog('info', args[0], args.slice(1));
 	}
 
 	prompt(question: string, anwser: any) {
-		this.nested("prompt", question, anwser);
+		this.nested('prompt', question, anwser);
 	}
 
 	verbose(...args: any[]) {
 		if (this._logger.isVerboseEnabled()) {
 			const text: string = args[0] as string;
-			this.nested("verbose", text, args.slice(1));
+			this.nested('verbose', text, args.slice(1));
 		}
 	}
 
@@ -163,7 +163,7 @@ class Logger implements ILogger {
 		return [
 			`${appInfo.displayName} [${appInfo.name}] ${appInfo.version}`,
 			`${appInfo.description}`,
-			"",
+			'',
 		];
 	}
 
@@ -216,18 +216,18 @@ class Logger implements ILogger {
 }
 
 const loggerMap: Map<string, ILogger> = new Map<string, ILogger>();
-const actLogger: ILogger = createLogger("_act_", {
+const actLogger: ILogger = createLogger('_act_', {
 	appInfo: {
-		name: "AC Tools",
-		displayName: "AC Tools",
-		version: "",
-		description: "AC Tools",
-		url: "",
+		name: 'AC Tools',
+		displayName: 'AC Tools',
+		version: '',
+		description: 'AC Tools',
+		url: '',
 		getShortName: () => {
-			return "actools-js";
+			return 'actools-js';
 		},
 	},
-	verbose: "verbose",
+	verbose: 'verbose',
 	showBanner: true,
 });
 

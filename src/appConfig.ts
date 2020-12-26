@@ -1,11 +1,11 @@
-import * as os from "os";
-import * as fs from "fs";
-import * as path from "path";
-import * as dotenv from "dotenv";
-import { IAppConfig } from "./interfaces";
+import * as os from 'os';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as dotenv from 'dotenv';
+import { IAppConfig } from './interfaces';
 
-const homedir: string = path.join(os.homedir(), ".act-nodejs");
-const file: string = path.join(homedir, ".env");
+const homedir: string = path.join(os.homedir(), '.act-nodejs');
+const file: string = path.join(homedir, '.env');
 
 class AppConfig implements IAppConfig {
 	private _options: dotenv.DotenvConfigOptions;
@@ -26,7 +26,7 @@ class AppConfig implements IAppConfig {
 			throw config.error;
 		}
 
-		return config.parsed || dotenv.parse("");
+		return config.parsed || dotenv.parse('');
 	}
 
 	keys(): string[] {
@@ -34,7 +34,7 @@ class AppConfig implements IAppConfig {
 	}
 
 	get(key: string, defaultValue?: string): string {
-		return this._dotenv[key] || defaultValue || "";
+		return this._dotenv[key] || defaultValue || '';
 	}
 
 	set(key: string, value: string) {
@@ -49,13 +49,13 @@ class AppConfig implements IAppConfig {
 	}
 
 	private save(): void {
-		let result: string = "";
+		let result: string = '';
 
 		// Stringify
 		for (const [key, value] of Object.entries(this._dotenv)) {
 			if (key) {
 				const line = `${key}=${String(value)}`;
-				result += line + "\n";
+				result += line + '\n';
 			}
 		}
 

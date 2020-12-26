@@ -1,4 +1,4 @@
-import * as Command from "commander";
+import * as Command from 'commander';
 
 export interface IAppInfo {
 	name: string;
@@ -18,15 +18,15 @@ export interface ILoggerConfig {
 }
 
 export type LogLevel =
-	| "error"
-	| "warn"
-	| "help"
-	| "data"
-	| "info"
-	| "debug"
-	| "prompt"
-	| "verbose"
-	| "input";
+	| 'error'
+	| 'warn'
+	| 'help'
+	| 'data'
+	| 'info'
+	| 'debug'
+	| 'prompt'
+	| 'verbose'
+	| 'input';
 
 export interface ILogger {
 	error: (...args: any) => void;
