@@ -1,5 +1,7 @@
 # Registro de modificações
 
+### [0.1.3](https://github.com/brodao/act-core-js/compare/v0.0.13...v0.1.3) (2021-01-08)
+
 ### [0.0.13](https://github.com/brodao/act-core-js/compare/v0.0.12...v0.0.13) (2020-12-23)
 
 ### [0.0.12](https://github.com/brodao/act-core-js/compare/v0.0.11...v0.0.12) (2020-12-21)
