@@ -1,18 +1,19 @@
-import { AppCommander } from './appCommand';
-import { IAppCommander, IAppOptions } from './interfaces';
-import { jsonFromFile, jsonToFile } from './jsonFile';
-import { getLogger } from './logger';
+import { AppCommander } from "./appCommander";
+import { IAppCommander, IAppOptions } from "./interfaces";
+import { jsonFromFile, jsonToFile } from "./jsonFile";
+import { getLogger } from "./logger";
+export { IAppCommander, IAppInfo, ILogger, IAppConfig } from "./interfaces";
 
 export namespace ACT {
 	let appCommander: IAppCommander;
 
-	export const logger = getLogger('_act_');
+	export const logger = getLogger("_act_");
 
 	export function initialzeApp(options: IAppOptions) {
 		if (!appCommander) {
 			appCommander = new AppCommander(options);
 		} else {
-			throw new Error('ACT.initialzeApp already executed');
+			throw new Error("ACT.initialzeApp already executed");
 		}
 
 		return appCommander;

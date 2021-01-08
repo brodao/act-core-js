@@ -44,7 +44,7 @@ export interface ILogger {
 	setConfig: (newConfig: ILoggerConfig) => void;
 }
 
-//opts(): { [key: string]: any };
+// opts(): { [key: string]: any };
 export interface IAppConfig {
 	keys: () => string[];
 	get: (key: string, defaultValue?: string) => string;

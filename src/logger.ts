@@ -42,12 +42,12 @@ class Logger implements ILogger {
 
 	setConfig(newConfig: ILoggerConfig) {
 		this._config = { ...this._config, ...newConfig };
-		const level: string = 'verbose'; //this._config.verbose ? "debug" : "info";
+		const level: string = 'info'; // this._config.verbose ? "debug" : "info";
 
 		const options: winston.LoggerOptions = {
 			exitOnError: false,
-			handleExceptions: true,
-			level: level,
+			handleExceptions: false,
+			level,
 			levels: winston.config.cli.levels,
 			format: winston.format.combine(
 				winston.format.splat(),
@@ -56,7 +56,7 @@ class Logger implements ILogger {
 				winston.format.timestamp(),
 				consoleFormat
 			),
-			transports: [new winston.transports.Console()], //{ handleExceptions: true }
+			transports: [new winston.transports.Console()], // { handleExceptions: true }
 		};
 
 		if (this._logger) {
@@ -65,14 +65,14 @@ class Logger implements ILogger {
 			this._logger = winston.createLogger(options);
 
 			this._textFile = new winston.transports.File({
-				level: level,
+				level,
 				filename: this._id + '.log',
 				dirname: outDir,
 				format: fileTextFormat,
 			});
 
 			this._jsonFile = new winston.transports.File({
-				level: level,
+				level,
 				filename: this._id + '.log.json',
 				dirname: outDir,
 				format: winston.format.json(),
@@ -96,9 +96,10 @@ class Logger implements ILogger {
 			const item: any = args[key];
 
 			if (Array.isArray(item)) {
-				for (let index = 0; index < item.length; index++) {
-					this.consoleLog('data', '> %s', item[index]);
-				}
+				const aitem: any[] = item;
+				aitem.forEach((element: any) => {
+					this.consoleLog('data', '> %s', element);
+				});
 			} else if (typeof args[key] === 'object') {
 				this.nested('data', key, args[key]);
 			} else {

@@ -1,5 +1,6 @@
 import * as os from 'os';
 import * as fs from 'fs';
+import * as fse from 'fs-extra';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import { IAppConfig } from './interfaces';
@@ -17,16 +18,20 @@ class AppConfig implements IAppConfig {
 	}
 
 	reload(): dotenv.DotenvParseOutput {
-		const config: dotenv.DotenvConfigOutput = dotenv.config({
-			...this._options,
-			debug: true,
-		});
+		if (fse.existsSync(this._options.path ? this._options.path : '.')) {
+			const config: dotenv.DotenvConfigOutput = dotenv.config({
+				...this._options,
+				debug: true,
+			});
 
-		if (config.error) {
-			throw config.error;
+			if (config.error) {
+				throw config.error;
+			}
+
+			return config.parsed || dotenv.parse('');
 		}
 
-		return config.parsed || dotenv.parse('');
+		return {};
 	}
 
 	keys(): string[] {
@@ -44,8 +49,8 @@ class AppConfig implements IAppConfig {
 
 	delete(key: string) {
 		throw new Error(`delete: não implementado ${key}`);
-		//this._dotenv.splice(key);
-		//this.save();
+		// this._dotenv.splice(key);
+		// this.save();
 	}
 
 	private save(): void {
@@ -54,7 +59,7 @@ class AppConfig implements IAppConfig {
 		// Stringify
 		for (const [key, value] of Object.entries(this._dotenv)) {
 			if (key) {
-				const line = `${key}=${String(value)}`;
+				const line = `${key}=${value}`;
 				result += line + '\n';
 			}
 		}
